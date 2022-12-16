@@ -1,10 +1,10 @@
 import React from 'react'
-import './App.css'
+import styles from './App.module.scss';
 
-function App() {
+const App = () => {
   return (
-    <div className='App'>
-      Awsome store app!!!
+    <div className={styles.app}>
+      Awesome store app!!!
     </div>
   )
 }
