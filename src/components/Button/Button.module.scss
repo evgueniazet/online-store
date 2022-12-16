@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.button_primary {
+  background-color: $primary;
+  font-weight: 400;
+  border-radius: 3px;
+  padding: 5px 30px;
+  color: #fff;
+  border: 1px solid $primary;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+
+.button_secondary {
+  background-color: $bg;
+  color: $primary;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
