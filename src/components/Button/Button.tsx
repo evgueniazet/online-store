@@ -9,14 +9,20 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-const Button: React.FC<ButtonProps> = (props) => {
+const Button: React.FC<ButtonProps> = ({ color, onClick, title }) => {
+  const btnClass = classNames(
+    styles.button,
+    {
+      [styles.button_secondary]: color === ButtonColors.Secondary,
+    },
+    {
+      [styles.button_primary]: color === ButtonColors.Primary,
+    },
+  );
+
   return (
-    <button
-      onClick={props.onClick}
-      className={classNames(styles.button_primary, {
-        [styles.button_secondary]: props.color === ButtonColors.Secondary,
-      })}>
-      {props.title}
+    <button onClick={onClick} className={btnClass}>
+      {title}
     </button>
   );
 };
