@@ -18,8 +18,8 @@ const App = () => {
   return (
     <div className={styles.app}>
       Awesome store app!!!
-      <Button title='button1' color={ButtonColors.Secondary} onClick={handleClick} />
-      <Button title='button2' onClick={handleClick} />
+      <Button title='button1' color={ButtonColors.Primary} onClick={handleClick} />
+      <Button title='button2' color={ButtonColors.Secondary} onClick={handleClick} />
       <Input placeholder='Insert text' onChange={handleChange} value={value} />
     </div>
   );

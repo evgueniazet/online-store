@@ -1,13 +1,16 @@
 @import '../../styles/variables.scss';
 
-.button_primary {
-  background-color: $primary;
+.button {
   font-weight: 400;
   border-radius: 3px;
   padding: 5px 30px;
-  color: #fff;
   border: 1px solid $primary;
   cursor: pointer;
+}
+
+.button_primary {
+  background-color: $primary;
+  color: #fff;
   transition: background-color 0.3s ease;
 
   &:hover {
