@@ -7,7 +7,7 @@ import { Input } from './components/Input/Input';
 
 const App = () => {
   const [value, setValue] = React.useState('123');
-  const handleClick = () => {
+  const handleClick = (): void => {
     console.log('click');
   };
 

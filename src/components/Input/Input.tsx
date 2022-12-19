@@ -1,12 +1,6 @@
 import React from 'react';
 import styles from '../Input/Input.module.scss';
-
-interface InputProps {
-  value: string;
-  placeholder?: string;
-  color?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { InputProps } from '../../interfaces/InputProps';
 
 export const Input: React.FC<InputProps> = (props: InputProps) => (
   <input
