@@ -3,7 +3,7 @@ import styles from './App.module.scss';
 import './styles/fonts.scss';
 import { Button } from './components/Button/Button';
 import { ButtonColors } from './enums/ButtonColors';
-import { Input } from './components/Input/Input';
+import { TextInput } from './components/Input/TextInput';
 
 const App = () => {
   const [value, setValue] = React.useState('123');
@@ -20,7 +20,7 @@ const App = () => {
       Awesome store app!!!
       <Button title='button1' color={ButtonColors.Primary} onClick={handleClick} />
       <Button title='button2' color={ButtonColors.Secondary} onClick={handleClick} />
-      <Input placeholder='Insert text' onChange={handleChange} value={value} />
+      <TextInput placeholder='Insert text' onChange={handleChange} value={value} />
     </div>
   );
 };
