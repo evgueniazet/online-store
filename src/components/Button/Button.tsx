@@ -2,14 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import { ButtonColors } from '../../enums/ButtonColors';
 import styles from './Button.module.scss';
+import { ButtonProps } from '../../interfaces/ButtonProps';
 
-interface ButtonProps {
-  title: string;
-  color?: string;
-  onClick: () => void;
-}
-
-const Button: React.FC<ButtonProps> = ({ color, onClick, title }) => {
+export const Button: React.FC<ButtonProps> = ({ color, onClick, title } : ButtonProps) => {
   const btnClass = classNames(
     styles.button,
     {
@@ -26,5 +21,3 @@ const Button: React.FC<ButtonProps> = ({ color, onClick, title }) => {
     </button>
   );
 };
-
-export default Button;
