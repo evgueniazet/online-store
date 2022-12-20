@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './App.module.scss';
 import './styles/fonts.scss';
 import { Button } from './components/Button/Button';
 import { ButtonColors } from './enums/ButtonColors';
 import { Input } from './components/Input/Input';
+import { Checkbox } from './components/ListWithCeckboxes/ListWithCeckboxes';
 
 const App = () => {
   const [value, setValue] = React.useState('123');
+  const [isCheckedA, setIsCheckedA] = useState(false);
+  const [isCheckedB, setIsCheckedB] = useState(false);
+
   const handleClick = (): void => {
     console.log('click');
   };
@@ -15,12 +19,22 @@ const App = () => {
     setValue(e.target.value);
   };
 
+  const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckedA(e.target.checked);
+  };
+
+  const handleChangeB = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckedB(e.target.checked);
+  };
+
   return (
     <div className={styles.app}>
       Awesome store app!!!
       <Button title='button1' color={ButtonColors.Primary} onClick={handleClick} />
       <Button title='button2' color={ButtonColors.Secondary} onClick={handleClick} />
       <Input placeholder='Insert text' onChange={handleChange} value={value} />
+      <Checkbox handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
+      <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
     </div>
   );
 };
