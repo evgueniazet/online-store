@@ -1,4 +1,4 @@
-export interface InputProps {
+export interface TextInputProps {
   value: string;
   placeholder?: string;
   color?: string;

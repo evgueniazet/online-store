@@ -3,8 +3,8 @@ import styles from './App.module.scss';
 import './styles/fonts.scss';
 import { Button } from './components/Button/Button';
 import { ButtonColors } from './enums/ButtonColors';
-import { Input } from './components/Input/Input';
-import { Checkbox } from './components/ListWithCeckboxes/ListWithCeckboxes';
+import { TextInput } from './components/Input/TextInput';
+import { ListWithCheckboxes } from './components/ListWithCheckboxes/ListWithCheckboxes';
 
 const App = () => {
   const [value, setValue] = React.useState('123');
@@ -32,9 +32,9 @@ const App = () => {
       Awesome store app!!!
       <Button title='button1' color={ButtonColors.Primary} onClick={handleClick} />
       <Button title='button2' color={ButtonColors.Secondary} onClick={handleClick} />
-      <Input placeholder='Insert text' onChange={handleChange} value={value} />
-      <Checkbox handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
-      <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
+      <TextInput placeholder='Insert text' onChange={handleChange} value={value} />
+      <ListWithCheckboxes handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
+      <ListWithCheckboxes handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
     </div>
   );
 };
