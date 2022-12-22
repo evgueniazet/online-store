@@ -1,20 +1,15 @@
 import React from 'react';
 import styles from './Select.module.scss';
+import { SelectProps } from '../../interfaces/SelectProps';
 
-interface SelectProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-export const Select: React.FC<SelectProps>  = ({value, onChange}: SelectProps) => {
+export const Select: React.FC<SelectProps> = ({ value, options, onChange }: SelectProps) => {
   return (
-    <select className={styles.select}>
-      <option className={styles.option} value={value}>{value}</option>
-      <option className={styles.option} value={value}>{value}</option>
-      <option className={styles.option} selected value={value}>
-        {value}
-      </option>
-      <option className={styles.option} value={value}>{value}</option>
+    <select value={value} className={styles.select} onChange={onChange}>
+      {options.map((option) => (
+        <option key={option.value} className={styles.option} value={option.value}>
+          {option.label}
+        </option>
+      ))}
     </select>
   );
 };

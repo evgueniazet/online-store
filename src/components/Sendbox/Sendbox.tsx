@@ -6,11 +6,32 @@ import { ButtonColors } from '../../enums/ButtonColors';
 import { TextInput } from '../Input/TextInput';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Select } from '../Select/Select';
+import { SelectOption } from '../../interfaces/SelectOption';
+
+const OPTIONS = [
+  {
+    value: '1',
+    label: 'test 1',
+  },
+  {
+    value: '2',
+    label: 'test 2',
+  },
+  {
+    value: '3',
+    label: 'test 3',
+  },
+  {
+    value: '4',
+    label: 'test 4',
+  },
+];
 
 export const Sendbox = () => {
   const [value, setValue] = React.useState('123');
   const [isCheckedA, setIsCheckedA] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
+  const [select, setSelect] = useState<SelectOption['value']>(OPTIONS[3].value);
 
   const handleClick = (): void => {
     console.log('click');
@@ -29,8 +50,7 @@ export const Sendbox = () => {
   };
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const [value, setState] = React.useState('111');
-    setState(e.target.value);
+    setSelect(e.target.value);
   };
 
   return (
@@ -41,7 +61,7 @@ export const Sendbox = () => {
       <TextInput placeholder='Insert text' onChange={handleChange} value={value} />
       <Checkbox handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
       <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
-      <Select value='string1' onChange={handleChangeSelect} />
+      <Select value={select} options={OPTIONS} onChange={handleChangeSelect} />
     </div>
   );
 };

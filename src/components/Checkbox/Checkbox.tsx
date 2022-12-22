@@ -4,7 +4,11 @@ import styles from '../Checkbox/Checkbox.module.scss';
 import { Mark } from '../../icons/icons';
 import { CheckboxProps } from '../../interfaces/CheckboxProps';
 
-export const Checkbox = ({ label, isChecked, handleChange }: CheckboxProps) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  label,
+  isChecked,
+  handleChange,
+}: CheckboxProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
