@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import styles from '../ListWithCheckboxes/ListWithCheckboxes.module.scss';
+import styles from '../Checkbox/Checkbox.module.scss';
 import { Mark } from '../../icons/icons';
-import { ListWithCheckboxesProps } from '../../interfaces/ListWithCheckboxesProps';
+import { CheckboxProps } from '../../interfaces/CheckboxProps';
 
-export const ListWithCheckboxes = ({ label, isChecked, handleChange }: ListWithCheckboxesProps) => {
+export const Checkbox = ({ label, isChecked, handleChange }: CheckboxProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
