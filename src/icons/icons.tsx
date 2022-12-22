@@ -1,0 +1,1 @@
+export { ReactComponent as Mark } from './mark.svg';
