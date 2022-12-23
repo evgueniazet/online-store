@@ -1,7 +1,7 @@
-import { Sendbox } from './components/Sendbox/Sendbox';
+import { Sandbox } from './components/Sandbox/Sandbox';
 
 const App = () => {
-  return <Sendbox />;
+  return <Sandbox />;
 };
 
 export default App;

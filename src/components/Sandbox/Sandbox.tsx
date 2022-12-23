@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Sendbox.module.scss';
+import styles from './Sandbox.module.scss';
 import '../../styles/fonts.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
@@ -7,6 +7,7 @@ import { TextInput } from '../Input/TextInput';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Select } from '../Select/Select';
 import { SelectOption } from '../../interfaces/SelectOption';
+import { RangePicker } from '../RangePicker/RangePicker';
 
 const OPTIONS = [
   {
@@ -27,11 +28,12 @@ const OPTIONS = [
   },
 ];
 
-export const Sendbox = () => {
+export const Sandbox = () => {
   const [value, setValue] = React.useState('123');
   const [isCheckedA, setIsCheckedA] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
   const [select, setSelect] = useState<SelectOption['value']>(OPTIONS[3].value);
+  const [range, setRange] = useState<string>('0');
 
   const handleClick = (): void => {
     console.log('click');
@@ -50,7 +52,11 @@ export const Sendbox = () => {
   };
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelect(e.target.value);
+    setSelect(e.target.value);    
+  };
+
+  const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {    
+    setRange(event.target.value);
   };
 
   return (
@@ -62,6 +68,7 @@ export const Sendbox = () => {
       <Checkbox handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
       <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
       <Select value={select} options={OPTIONS} onChange={handleChangeSelect} />
+      <RangePicker onChange={changeWidth} value={range} max={400} />
     </div>
   );
 };
