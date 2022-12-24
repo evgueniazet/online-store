@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageProps } from '../../types/Page';
-import Link from '../../utils/Link';
+import Link from '../Link/Link';
 
 const HomePage = ({ queryParams }: PageProps) => {
   // query string for test /?id=10&limit=100 
