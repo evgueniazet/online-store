@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './App.module.scss';
 import './styles/fonts.scss';
 import Route from './utils/Route';
 import HomePage from './components/Pages/HomePage';
@@ -10,7 +9,7 @@ import { Sendbox } from './components/Sendbox/Sendbox';
 const App = () => {
 
   return (
-    <div className={styles.app}>
+    <div>
       <Route path="/">
         <HomePage />
       </Route>
