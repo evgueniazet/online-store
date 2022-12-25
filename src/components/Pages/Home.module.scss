@@ -135,9 +135,20 @@
   padding-left: 10px;
   width: 100%;
   height: 100px;
-  overflow: auto;
   margin-top: 10px;
   color: $secondaryLight;
+}
+
+.filterTitle {
+  margin: 0;
+  font-size: 17px;
+  text-align: center;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.listWrapper {
+  overflow: auto;
 
   &::-webkit-scrollbar {
     background-color: $primaryDark;
@@ -149,13 +160,6 @@
     background-color: #fff;
     border-radius: 6px;
   }
-}
-
-.filterTitle {
-  margin: 0;
-  font-size: 17px;
-  text-align: center;
-  font-weight: 400;
 }
 
 .label {

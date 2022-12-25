@@ -38,64 +38,69 @@ const HomePage = ({ queryParams }: PageProps) => {
             </div>
             <div className={styles.filter}>
               <h2 className={styles.filterTitle}>Category</h2>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
+              <div className={styles.listWrapper}>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
               </div>
             </div>
             <div className={styles.filter}>
               <h2 className={styles.filterTitle}>Brand</h2>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
-              </div>
-              <div className={styles.listItemWrapper}>
-                <input type='checkbox' className={styles.checkbox} />
-                <label className={styles.label}>text</label>
+              <div className={styles.listWrapper}>
+                {' '}
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
+                <div className={styles.listItemWrapper}>
+                  <input type='checkbox' className={styles.checkbox} />
+                  <label className={styles.label}>text</label>
+                </div>
               </div>
             </div>
             <div className={styles.rangeWrapper}>
