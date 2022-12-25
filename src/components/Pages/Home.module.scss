@@ -93,13 +93,13 @@
   min-width: 250px;
   height: 100%;
   overflow: auto;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 10px;
   background-color: $primaryDark;
   background-color: $primary;
 
   &::-webkit-scrollbar {
-    display: none; 
+    display: none;
   }
 }
 
@@ -112,7 +112,7 @@
   font-size: 15px;
   border-radius: 3px;
   padding: 2px 20px;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   cursor: pointer;
   background-color: $primaryDark;
   color: $secondaryLight;
@@ -128,7 +128,7 @@
 }
 
 .filter {
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -162,14 +162,14 @@
   color: $secondaryLight;
   width: 15px;
   height: 15px;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 3px;
   background-color: transparent;
   z-index: 1;
 }
 
 .rangeWrapper {
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 5px;
   margin-top: 10px;
   padding: 0 30px 15px 30px;
@@ -233,7 +233,7 @@
   align-items: center;
   padding: 10px;
   background-color: $primary;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 10px;
   color: $secondaryLight;
 }
@@ -266,7 +266,7 @@
   font-size: 15px;
   border-radius: 3px;
   padding: 2px 20px;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   cursor: pointer;
   background-color: $primaryDark;
   color: $secondaryLight;
@@ -279,7 +279,6 @@
 
 .cardsContainer {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   row-gap: 10px;
   column-gap: 10px;
@@ -288,18 +287,18 @@
   height: calc(100% - 50px);
   overflow: auto;
   background-color: $primary;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 10px;
   color: $secondaryLight;
 }
 
 .card {
   background-color: $primaryDark;
-  border: 1px solid #0082c826;
+  border: 1px solid $primaryLight;
   border-radius: 3px;
   background-image: url(../../img/random_img.jpg);
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 190px;
   position: relative;
 }
 
@@ -307,6 +306,7 @@
   display: block;
   background-color: $primary;
   text-align: center;
+  padding: 5px 0;
 }
 
 .cardButtons {
@@ -316,10 +316,10 @@
 }
 
 .cardButton {
- font-size: 15px;
+  font-size: 15px;
   border-radius: 3px;
-  padding: 2px 20px;
-  border: 1px solid #0082c826;
+  padding: 2px 15px;
+  border: 1px solid $primaryLight;
   cursor: pointer;
   background-color: $primaryDark;
   color: $secondaryLight;
