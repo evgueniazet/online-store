@@ -134,15 +134,28 @@
   flex-direction: column;
   padding-left: 10px;
   width: 100%;
+  height: 100px;
   overflow: auto;
   margin-top: 10px;
   color: $secondaryLight;
+
+  &::-webkit-scrollbar {
+    background-color: $primaryDark;
+    border-radius: 6px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 6px;
+  }
 }
 
 .filterTitle {
   margin: 0;
   font-size: 17px;
   text-align: center;
+  font-weight: 400;
 }
 
 .label {
@@ -154,6 +167,10 @@
 
 .form {
   margin-top: 5px;
+}
+
+.listItemWrapper {
+  display: flex;
 }
 
 .checkbox {
@@ -221,7 +238,6 @@
 .cards {
   padding-left: 20px;
   height: 100%;
-  overflow: auto;
 }
 
 .cardsHeader {
@@ -290,6 +306,18 @@
   border: 1px solid $primaryLight;
   border-radius: 10px;
   color: $secondaryLight;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    background-color: $primaryDark;
+    border-radius: 6px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 6px;
+  }
 }
 
 .card {
