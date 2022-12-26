@@ -95,7 +95,6 @@
   overflow: auto;
   border: 1px solid $primaryLight;
   border-radius: 10px;
-  background-color: $primaryDark;
   background-color: $primary;
 
   &::-webkit-scrollbar {
@@ -306,7 +305,6 @@
   margin-top: 10px;
   height: calc(100% - 50px);
   overflow: auto;
-  background-color: $primary;
   border: 1px solid $primaryLight;
   border-radius: 10px;
   color: $secondaryLight;
@@ -327,30 +325,54 @@
 .card {
   background-color: $primaryDark;
   border: 1px solid $primaryLight;
-  border-radius: 3px;
-  background-image: url(../../img/random_img.jpg);
+  border-radius: 5px;
   width: 160px;
-  height: 190px;
   position: relative;
+  overflow: hidden;
 }
 
 .cardTitle {
+  font-size: 14px;
   display: block;
-  background-color: $primary;
   text-align: center;
   padding: 5px 0;
 }
 
+.cardImg {
+  width: 100%;
+  height: 100px;
+  background-image: url(../../img/random_img.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.cardInfoWrapper {
+  background-color: $primary;
+  width: 50%;
+  opacity: 0.5;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  opacity: 1;
+}
+
 .cardButtons {
   display: flex;
-  position: absolute;
-  bottom: 0;
+  padding: 3px;
 }
 
 .cardButton {
+  width: 50%;
+  margin: 3px;
   font-size: 15px;
   border-radius: 3px;
-  padding: 2px 15px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid $primaryLight;
   cursor: pointer;
   background-color: $primaryDark;
