@@ -27,9 +27,9 @@ const Route = ({ path, children }: RouteProps) => {
   });
 
   return (
-    <div>
+    <>
       {currentPath === path? childrenWithQuery: null}
-    </div>
+    </>
   );
 }
 
