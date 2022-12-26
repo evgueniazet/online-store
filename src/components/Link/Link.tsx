@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkProps } from '../types/Link';
+import { LinkProps } from '../../types/Link';
 
 const Link = ({ className, linkTo, children }: LinkProps) => {
   const redirectTo = (event: React.MouseEvent<HTMLElement>) => {

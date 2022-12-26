@@ -1,9 +1,9 @@
 import React from 'react';
 import { PageProps } from '../../types/Page';
 import { Sendbox } from '../Sendbox/Sendbox';
-import Link from '../../utils/Link';
+import Link from '../Link/Link';
 import styles from './Home.module.scss';
-import { IconBasket, IconStore, Mark } from '../../icons/icons';
+import { IconBasket, IconStore} from '../../icons/icons';
 
 const HomePage = ({ queryParams }: PageProps) => {
   const cards = Array(15).fill(1);

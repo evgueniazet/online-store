@@ -1,13 +1,15 @@
+import React from 'react';
+import './styles/fonts.scss';
 import Route from './utils/Route';
-import HomePage from './components/Pages/Home';
-import CheckoutPage from './components/Pages/Checkout';
-import ProductPage from './components/Pages/Product';
-import styles from './App.module.scss';
+import HomePage from './components/Pages/HomePage';
+import CheckoutPage from './components/Pages/CheckoutPage';
+import ProductPage from './components/Pages/ProductPage';
+import { Sendbox } from './components/Sendbox/Sendbox';
 
 const App = () => {
 
   return (
-    <div className={styles.app}>
+    <div>
       <Route path="/">
         <HomePage />
       </Route>
@@ -17,6 +19,10 @@ const App = () => {
       <Route path="/product">
         <ProductPage />
       </Route>
+      <Route path="/sendbox">
+        <Sendbox />
+      </Route>
+
     </div>
   );
 };
