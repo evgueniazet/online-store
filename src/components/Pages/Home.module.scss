@@ -240,7 +240,7 @@
 
 .cards {
   padding-left: 20px;
-  height: 100%;
+  height: calc(100vh - 110px);
 }
 
 .cardsHeader {
@@ -341,15 +341,12 @@
 .cardImg {
   width: 100%;
   height: 100px;
-  background-image: url(../../img/random_img.jpg);
-  background-size: cover;
-  background-position: center;
 }
 
 .cardInfoWrapper {
   background-color: $primary;
-  width: 50%;
-  opacity: 0.5;
+  width: 100%;
+  height: 70px;
 }
 
 .cardInfo {
