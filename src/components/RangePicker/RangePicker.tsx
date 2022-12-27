@@ -18,7 +18,7 @@ export const RangePicker: React.FC<RangePickerProps> = ({
       <div className={styles.line} style={{ width: `${lineValue}%` }}></div>
       <input
         ref={ref}
-        type="range"
+        type='range'
         onChange={onChange}
         min={minValue}
         max={maxValue}

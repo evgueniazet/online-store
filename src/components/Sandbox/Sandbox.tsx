@@ -7,7 +7,9 @@ import { TextInput } from '../Input/TextInput';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Select } from '../Select/Select';
 import { SelectOption } from '../../interfaces/SelectOption';
+import { MultiRangeSliderData } from '../../interfaces/MultiRangeSliderData';
 import { RangePicker } from '../RangePicker/RangePicker';
+import { MultiRangeSlider } from '../MultiRangeSlider/MultiRangeSlider';
 
 const OPTIONS = [
   {
@@ -30,8 +32,8 @@ const OPTIONS = [
 
 export const Sandbox = () => {
   const [value, setValue] = React.useState('123');
-  const [isCheckedA, setIsCheckedA] = useState(false);
-  const [isCheckedB, setIsCheckedB] = useState(false);
+  const [isCheckedA, setIsCheckedA] = useState<boolean>(false);
+  const [isCheckedB, setIsCheckedB] = useState<boolean>(false);
   const [select, setSelect] = useState<SelectOption['value']>(OPTIONS[3].value);
   const [range, setRange] = useState<string>('0');
 
@@ -52,10 +54,10 @@ export const Sandbox = () => {
   };
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelect(e.target.value);    
+    setSelect(e.target.value);
   };
 
-  const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {    
+  const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRange(event.target.value);
   };
 
@@ -69,6 +71,11 @@ export const Sandbox = () => {
       <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
       <Select value={select} options={OPTIONS} onChange={handleChangeSelect} />
       <RangePicker onChange={changeWidth} value={range} max={400} />
+      <MultiRangeSlider
+        min={0}
+        max={1000}
+        onChange={({ min, max }: MultiRangeSliderData) => console.log(`min = ${min}, max = ${max}`)}
+      />
     </div>
   );
 };
