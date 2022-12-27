@@ -4,6 +4,7 @@ import { Sendbox } from '../Sendbox/Sendbox';
 import Link from '../Link/Link';
 import styles from './Home.module.scss';
 import { IconBasket, IconStore } from '../../icons/icons';
+import { Card } from '../Card/Card';
 import { Product } from '../../interfaces/Product';
 
 const HomePage = ({ queryParams }: PageProps) => {
@@ -120,23 +121,16 @@ const HomePage = ({ queryParams }: PageProps) => {
               </div>
             </div>
             <div className={styles.cardsContainer}>
-              {cards.map((card, index) => {
+              {cards.map((card: Product, index: number) => {
                 return (
-                  <div key={`card-${index}`} className={styles.card}>
-                    <div className={styles.cardTitle}>{card.title}</div>
-                    <img src={card.images[0]} className={styles.cardImg} />
-                    <div className={styles.cardInfoWrapper}>
-                      <div className={styles.cardInfo}>
-                        <span>Category: {card.category}</span>
-                        <span>Brand: {card.brand}</span>
-                        <span>Price: {card.price}</span>
-                      </div>
-                    </div>
-                    <div className={styles.cardButtons}>
-                      <button className={styles.cardButton}>Add to cart</button>
-                      <button className={styles.cardButton}>Details</button>
-                    </div>
-                  </div>
+                  <Card
+                    key={`check1-${index}`}
+                    brand={card.brand}
+                    price={card.price}
+                    category={card.category}
+                    title={card.title}
+                    images={card.images}
+                  />
                 );
               })}
             </div>
