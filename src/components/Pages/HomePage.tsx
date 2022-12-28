@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageProps } from '../../types/Page';
 import { Sendbox } from '../Sendbox/Sendbox';
 import Link from '../Link/Link';
 import styles from './Home.module.scss';
-import { IconBasket, IconStore} from '../../icons/icons';
+import { IconBasket, IconStore } from '../../icons/icons';
+import { Card } from '../Card/Card';
+import { Product } from '../../interfaces/Product';
 
 const HomePage = ({ queryParams }: PageProps) => {
-  const cards = Array(15).fill(1);
   const checkItems = Array(10).fill(1);
+  const [cards, setCards] = useState<Product[]>([]);
+
+  const fetchData = () => {
+    fetch('https://dummyjson.com/products')
+      .then((response) => response.json())
+      .then((data) => {
+        setCards(data.products);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   // query string for test /?id=10&limit=100
   // console.log(queryParams);
 
@@ -41,8 +56,8 @@ const HomePage = ({ queryParams }: PageProps) => {
             <div className={styles.filter}>
               <h2 className={styles.filterTitle}>Category</h2>
               <div className={styles.listWrapper}>
-                {checkItems.map((item) => (
-                  <div key={`check1-${item}`} className={styles.listItemWrapper}>
+                {checkItems.map((item, index) => (
+                  <div key={`check1-${index}`} className={styles.listItemWrapper}>
                     <input type='checkbox' className={styles.checkbox} />
                     <label className={styles.label}>text</label>
                   </div>
@@ -52,8 +67,8 @@ const HomePage = ({ queryParams }: PageProps) => {
             <div className={styles.filter}>
               <h2 className={styles.filterTitle}>Brand</h2>
               <div className={styles.listWrapper}>
-                {checkItems.map((item) => (
-                  <div key={`check2-${item}`} className={styles.listItemWrapper}>
+                {checkItems.map((item, index) => (
+                  <div key={`check2-${index}`} className={styles.listItemWrapper}>
                     <input type='checkbox' className={styles.checkbox} />
                     <label className={styles.label}>text</label>
                   </div>
@@ -106,24 +121,18 @@ const HomePage = ({ queryParams }: PageProps) => {
               </div>
             </div>
             <div className={styles.cardsContainer}>
-              {cards.map((card) => (
-                <div key={`card-${card}`} className={styles.card}>
-                  <div className={styles.cardTitle}>Card title</div>
-                  <div className={styles.cardImg}>
-                    <div className={styles.cardInfoWrapper}>
-                      <div className={styles.cardInfo}>
-                        <span>Category : </span>
-                        <span>Brand : </span>
-                        <span>Price : </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.cardButtons}>
-                    <button className={styles.cardButton}>Add to cart</button>
-                    <button className={styles.cardButton}>Details</button>
-                  </div>
-                </div>
-              ))}
+              {cards.map((card: Product, index: number) => {
+                return (
+                  <Card
+                    key={`check1-${index}`}
+                    brand={card.brand}
+                    price={card.price}
+                    category={card.category}
+                    title={card.title}
+                    images={card.images}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

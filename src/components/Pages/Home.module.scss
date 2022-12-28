@@ -240,7 +240,7 @@
 
 .cards {
   padding-left: 20px;
-  height: 100%;
+  height: calc(100vh - 110px);
 }
 
 .cardsHeader {
@@ -319,67 +319,5 @@
   &::-webkit-scrollbar-thumb {
     background-color: #fff;
     border-radius: 6px;
-  }
-}
-
-.card {
-  background-color: $primaryDark;
-  border: 1px solid $primaryLight;
-  border-radius: 5px;
-  width: 160px;
-  position: relative;
-  overflow: hidden;
-}
-
-.cardTitle {
-  font-size: 14px;
-  display: block;
-  text-align: center;
-  padding: 5px 0;
-}
-
-.cardImg {
-  width: 100%;
-  height: 100px;
-  background-image: url(../../img/random_img.jpg);
-  background-size: cover;
-  background-position: center;
-}
-
-.cardInfoWrapper {
-  background-color: $primary;
-  width: 50%;
-  opacity: 0.5;
-}
-
-.cardInfo {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  opacity: 1;
-}
-
-.cardButtons {
-  display: flex;
-  padding: 3px;
-}
-
-.cardButton {
-  width: 50%;
-  margin: 3px;
-  font-size: 15px;
-  border-radius: 3px;
-  padding: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $primaryLight;
-  cursor: pointer;
-  background-color: $primaryDark;
-  color: $secondaryLight;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: lighten($primaryDark, 5%);
   }
 }
