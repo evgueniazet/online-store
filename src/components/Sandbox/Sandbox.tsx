@@ -70,7 +70,7 @@ export const Sandbox = () => {
       <Checkbox handleChange={handleChangeA} isChecked={isCheckedA} label='A' />
       <Checkbox handleChange={handleChangeB} isChecked={isCheckedB} label='B' />
       <Select value={select} options={OPTIONS} onChange={handleChangeSelect} />
-      <RangePicker onChange={changeWidth} value={range} max={400} />
+      <RangePicker onChange={changeWidth} step={1} value={range} max={400} />
       <MultiRangeSlider
         min={0}
         max={1000}

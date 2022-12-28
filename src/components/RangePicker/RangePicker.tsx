@@ -7,6 +7,7 @@ export const RangePicker: React.FC<RangePickerProps> = ({
   max,
   value,
   onChange,
+  step
 }: RangePickerProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const minValue = min || 0;
@@ -22,7 +23,7 @@ export const RangePicker: React.FC<RangePickerProps> = ({
         onChange={onChange}
         min={minValue}
         max={maxValue}
-        step={1}
+        step={step}
         value={value}
         className={styles.range}
       />
