@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageProps } from '../../types/Page';
-import { Sendbox } from '../Sendbox/Sendbox';
+import { Sandbox } from '../Sandbox/Sandbox';
 import Link from '../Link/Link';
 import styles from './Home.module.scss';
 import { IconBasket, IconStore } from '../../icons/icons';

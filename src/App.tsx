@@ -4,7 +4,7 @@ import Route from './utils/Route';
 import HomePage from './components/Pages/HomePage';
 import CheckoutPage from './components/Pages/CheckoutPage';
 import ProductPage from './components/Pages/ProductPage';
-import { Sendbox } from './components/Sendbox/Sendbox';
+import { Sandbox } from './components/Sandbox/Sandbox';
 
 const App = () => {
 
@@ -19,8 +19,8 @@ const App = () => {
       <Route path="/product">
         <ProductPage />
       </Route>
-      <Route path="/sendbox">
-        <Sendbox />
+      <Route path="/sandbox">
+        <Sandbox />
       </Route>
 
     </div>
