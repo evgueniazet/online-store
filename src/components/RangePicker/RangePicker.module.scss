@@ -9,13 +9,13 @@
 .line {
   position: absolute;
   height: 3px;
-  background: #4f2fb8;
+  background: $primaryLight;
 }
 
 .range {
   width: 100%;
   appearance: none;
-  background-color: #dfc5f4;
+  background-color: $secondaryLight;
   border-radius: 4px;
   outline: none;
   height: 3px;
@@ -23,7 +23,7 @@
 
   &::-webkit-slider-thumb {
     position: relative;
-    background: $primary;
+    background: $light;
     width: 10px;
     height: 10px;
     border-radius: 50%;

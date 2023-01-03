@@ -6,6 +6,7 @@ import styles from './Home.module.scss';
 import { IconBasket, IconStore } from '../../icons/icons';
 import { Card } from '../Card/Card';
 import { Product } from '../../interfaces/Product';
+import { Footer } from '../Footer/Footer';
 
 const HomePage = ({ queryParams }: PageProps) => {
   const checkItems = Array(10).fill(1);
@@ -137,6 +138,7 @@ const HomePage = ({ queryParams }: PageProps) => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
 
     // {/* For demo purposes it needs to be deleted later */}
