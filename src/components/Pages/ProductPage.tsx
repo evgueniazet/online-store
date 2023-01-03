@@ -74,7 +74,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
                   <div>Price:</div>
                   <div className={styles.buttonWrapper}>
                     <Button
-                      title='Add to card'
+                      title='Add to cart'
                       color={ButtonColors.Primary}
                       onClick={handleClick}
                     />
