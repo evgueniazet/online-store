@@ -4,6 +4,7 @@ import Route from './utils/Route';
 import HomePage from './components/Pages/HomePage';
 import CheckoutPage from './components/Pages/CheckoutPage';
 import ProductPage from './components/Pages/ProductPage';
+import CartPage from './components/Pages/CartPage';
 import { Sandbox } from './components/Sandbox/Sandbox';
 
 const App = () => {
@@ -18,6 +19,9 @@ const App = () => {
       </Route>
       <Route path="/product">
         <ProductPage />
+      </Route>
+      <Route path="/cart">
+        <CartPage />
       </Route>
       <Route path="/sandbox">
         <Sandbox />
