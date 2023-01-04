@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.cardMainImage {
+  border-radius: 8px;
+  border: 1px solid $primaryLight;
+  width: 400px;
+  height: 250px;
+}
+
+.cardImagesPreview {
+  margin-top: 20px;
+}
+
+.cardImage {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid $primaryLight;
+  background-clip: content-box;
+  cursor: pointer;
+  transition: transform 0.25s;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.25s;
+  }
+}

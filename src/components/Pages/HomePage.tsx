@@ -131,6 +131,7 @@ const HomePage = ({ queryParams }: PageProps) => {
                     category={card.category}
                     title={card.title}
                     images={card.images}
+                    id={card.id}
                   />
                 );
               })}
