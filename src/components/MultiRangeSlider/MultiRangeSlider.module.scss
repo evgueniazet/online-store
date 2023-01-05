@@ -26,19 +26,19 @@
 }
 
 .sliderTrack {
-  background-color: #ced4da;
+  background-color: $light;
   width: 100%;
   z-index: 1;
 }
 
 .sliderRange {
-  background-color: #9fe5e1;
+  background-color: $light;
   z-index: 2;
 }
 
 .sliderLeftValue,
 .sliderRightValue {
-  color: #dee2e6;
+  color: $secondaryLight;
   font-size: 12px;
   margin-top: 20px;
 }
