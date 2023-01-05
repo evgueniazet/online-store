@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+
 export type PageProps = {
-  queryParams?: {[k: string]: string};
+  queryParams?: URLSearchParams,
+  children?: ReactNode
 }
