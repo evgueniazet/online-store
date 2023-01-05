@@ -19,9 +19,7 @@ export const ProductImages = ({ images }: ProductImagesProps) => {
 
   return (
     <div>
-      <div>
         <img src={source} className={styles.cardMainImage} />
-      </div>
       <div className={styles.cardImagesPreview}>
         {imagesFiltered.map((image: string) => {
           return (
