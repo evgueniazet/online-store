@@ -1,18 +1,16 @@
 import React from 'react';
 import styles from '../Card/Card.module.scss';
-import { Product } from '../../interfaces/Product';
+import { CardProp } from '../../interfaces/Product';
 
-export const Card: React.FC<Product> = ({
+export const Card: React.FC<CardProp> = ({
   title,
   images,
   brand,
   category,
   price,
-  key,
-}: Product) => {
+}: CardProp) => {
   return (
     <div className={styles.card}>
-      {key}
       <div className={styles.cardTitle}>{title}</div>
       <img src={images[0]} className={styles.cardImg} />
       <div className={styles.cardInfoWrapper}>
