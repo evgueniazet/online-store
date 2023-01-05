@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../Card/Card.module.scss';
 import { Product } from '../../interfaces/Product';
+import { Button } from '../Button/Button';
+import { ButtonColors } from '../../enums/ButtonColors';
 
 export const Card: React.FC<Product> = ({
   title,
@@ -8,8 +10,17 @@ export const Card: React.FC<Product> = ({
   brand,
   category,
   price,
+  id,
   key,
 }: Product) => {
+  const handleClickCart = (): void => {
+    location.href = '/cart';
+  };
+
+  const handleClickProductPage = (): void => {
+    location.href = `/product?productId=${id}`;
+  };
+
   return (
     <div className={styles.card}>
       {key}
@@ -23,8 +34,18 @@ export const Card: React.FC<Product> = ({
         </div>
       </div>
       <div className={styles.cardButtons}>
-        <button className={styles.cardButton}>Add to cart</button>
-        <button className={styles.cardButton}>Details</button>
+        <Button
+          title='Add to cart'
+          color={ButtonColors.Primary}
+          className={styles.cardButton}
+          onClick={handleClickCart}
+        />
+        <Button
+          title='Details'
+          color={ButtonColors.Primary}
+          className={styles.cardButton}
+          onClick={handleClickProductPage}
+        />
       </div>
     </div>
   );
