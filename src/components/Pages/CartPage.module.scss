@@ -104,3 +104,37 @@
 .productSum {
   color: $secondaryLight;
 }
+
+.sum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $secondaryLight;
+  background-color: $primary;
+  border: 1px solid $primaryLight;
+  border-radius: 10px;
+  margin-left: 20px;
+  padding: 10px;
+}
+
+.sumTitle {
+  background-color: $primaryDark;
+  width: 100%;
+}
+
+.sumProducts {
+  margin-top: 10px;
+}
+
+.totalSum {
+  margin-top: 10px;
+}
+
+.sumTextInput {
+  margin-top: 10px;
+}
+
+.sumButton {
+  width: 100px;
+  margin-top: 10px;
+}

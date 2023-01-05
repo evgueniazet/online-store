@@ -78,7 +78,13 @@ const CartPage = ({ queryParams }: PageProps) => {
               </div>
             </div>
           </div>
-          <div className={styles.sum}></div>
+          <div className={styles.sum}>
+            <span className={styles.sumTitle}>Summary</span>
+            <span className={styles.sumProducts}>Products: 0</span>
+            <span className={styles.totalSum}>Total: 0 $</span>
+            <TextInput className={styles.sumTextInput} placeholder='Insert text' onChange={handleChange} value={value} />
+            <Button title='button2' className={styles.sumButton} color={ButtonColors.Primary} onClick={handleClick} />
+          </div>
         </div>
       </section>
       <Footer />

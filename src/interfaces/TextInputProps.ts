@@ -3,4 +3,5 @@ export interface TextInputProps {
   placeholder?: string;
   color?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
