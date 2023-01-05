@@ -6,7 +6,7 @@ export const Select: React.FC<SelectProps> = ({ value, options, onChange }: Sele
   return (
     <select value={value} className={styles.select} onChange={onChange}>
       {options.map((option) => (
-        <option key={option.value} className={styles.option} value={option.value}>
+        <option key={option.value} className={styles.option} value={option.value} disabled={option.disabled? option.disabled : false}>
           {option.label}
         </option>
       ))}
