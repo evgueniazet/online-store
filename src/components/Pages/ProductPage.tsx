@@ -72,16 +72,19 @@ const ProductPage = ({ queryParams }: PageProps) => {
               <div className={styles.cardContent}>
                 <div className={styles.cardButtonsWrapper}>
                   <div>Price:{card.price}$</div>
-                  <div className={styles.buttonWrapper}>
-                    <Button
-                      title='Add to cart'
-                      color={ButtonColors.Primary}
-                      onClick={handleClick}
-                    />
-                  </div>
-                  <div className={styles.buttonWrapper}>
-                    <Button title='Buy now' color={ButtonColors.Primary} onClick={handleClick} />
-                  </div>
+                  <Button
+                    title='Add to cart'
+                    color={ButtonColors.Primary}
+                    onClick={handleClick}
+                    className={styles.cardButton}
+                  />
+
+                  <Button
+                    title='Buy now'
+                    color={ButtonColors.Primary}
+                    onClick={handleClick}
+                    className={styles.cardButton}
+                  />
                 </div>
                 <div className={styles.cardListWrapper}>
                   <div className={styles.cardList}>
