@@ -14,7 +14,9 @@ export const Header: React.FC<HeaderProps> = ({ price }: HeaderProps) => {
         <span className={styles.headerText}> Total: {price}</span>
         <div className={styles.basketWrapper}>
           <span className={styles.headerProductsSum}>1</span>
-          <IconBasket className={styles.headerBasket} />
+          <a href='/cart'>
+            <IconBasket className={styles.headerBasket} />
+          </a>
         </div>
       </div>
     </header>
