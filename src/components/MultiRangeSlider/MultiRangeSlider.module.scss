@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .container {
-  height: 100vh;
+  height: 8vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
 
 .slider {
   position: relative;
-  width: 95%;
+  width: 180px;
 }
 
 .sliderTrack,
@@ -61,7 +61,7 @@
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 95%;
+  width: 180px;
   outline: none;
 }
 
