@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { ProductsUtilityPanelProps } from '../../types/ProductsUtility';
 import { SortOptions, selectSortOptions } from '../../types/SortOptions';
 import { redirectTo, toggleSingleParam } from '../../utils/Route';
 import { TextInput } from '../Input/TextInput';
 import { Select } from '../Select/Select';
 import styles from './ProductsUtilityPanel.module.scss';
-
-type ProductsUtilityPanelProps = {
-  queryParams?: URLSearchParams,
-  total?: number,
-  sort: SortOptions,
-  onQueryUpdate: (queryParams: URLSearchParams) => void
-  search: string
-}
 
 const FOUND_TITLE = 'Found';
 const SEARCH_PRODUCT = 'Search product';
