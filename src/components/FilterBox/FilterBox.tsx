@@ -14,15 +14,11 @@ import { stockRangeConfig } from '../../utils/config/stockRange';
 import { FilterRangeType } from '../../types/FilterRangeType';
 import { FilterBoxProps } from '../../types/FilterBox';
 
-
-
 const RESET_FILTERS_LABEL = 'Reset Filters';
 const COPY_LINK_LABEL = 'Copy Link';
 const LINK_COPIED_LABEL = 'Copied!';
 
-
 const FilterBox = ({ queryParams, filterLists, onQueryUpdate }: FilterBoxProps) => {
-
   const filterCateroriesTitle = 'Category';
   const filterBrandsTitle = 'Brand';
   const filterCategoriesList = filterLists[FilterListsOptions.category];
