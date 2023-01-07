@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.headerWrapper {
+  display: flex;
+  justify-content: center;
+  background-color: $primaryDark;
+}
+
+.header {
+  max-width: 1024px;
+  height: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: $secondaryLight;
+}
+
+.headerLogoIcon {
+  fill: $secondaryLight;
+  width: 30px;
+  height: 30px;
+}
+
+.headerLogoTitle {
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.headerText {
+  margin-top: 15px;
+}
+
+.basketWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.headerBasket {
+  fill: $secondaryLight;
+  width: 30px;
+  height: 30px;
+  transition: fill 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    fill: $light;
+    transition: fill 0.3s ease;
+  }
+}
