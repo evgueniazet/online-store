@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageProps } from '../../types/Page';
 import DataService from '../../utils/DataService';
-import { CardProp } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 import { SortOptions } from '../../types/SortOptions';
 import { FilterLists } from '../../types/FilterList';
 import { Header } from '../Header/Header';
@@ -17,7 +17,7 @@ const HomePage = ({ queryParams }: PageProps) => {
 
   const { products: initProducts, total: initTotal, sort: initSort, filterLists: initFiltrLists, search: initSearch } = dataService.getData(queryParams);
 
-  const [products, setProducts] = useState<CardProp[]>(initProducts);
+  const [products, setProducts] = useState<Product[]>(initProducts);
   const [total, setTotal] = useState<number>(initTotal);
   const [sort, setSort] = useState<SortOptions>(initSort);
   const [filterLists, setFilterLists] = useState<FilterLists>(initFiltrLists);

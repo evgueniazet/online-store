@@ -1,10 +1,10 @@
-export interface CardProp {
+export interface Product {
   brand: string;
   category: string;
   description?: string;
   title: string;
   thumbnail?: string;
-  id?: number;
+  id: number;
   discountPercentage?: number;
   price: number;
   rating?: number;

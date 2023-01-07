@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Product } from '../../types/Product';
+import { Product } from '../../interfaces/Product';
 import { ProductImages } from '../ProductImages/ProductImages';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
@@ -20,13 +20,13 @@ const defaultBasket: Basket = {
 };
 
 const ProductPage = ({ queryParams }: PageProps) => {
-  const productId = queryParams?.get(SearchQueryKeys.productId);
+  const productId = Number(queryParams?.get(SearchQueryKeys.productId));  
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();  
 
-  const goCart = () => {
-    window.location.assign('/cart');
+  const redirectToCart = () => {
+    window.location.href = '/cart';
   };
 
   const handleAddClick = (): void => {
@@ -34,7 +34,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
 
     if (productId) {
       basketCopy.products.push({
-        id: productId,
+        id: Number(productId),
         quantity: 1,
       });
 
@@ -58,8 +58,10 @@ const ProductPage = ({ queryParams }: PageProps) => {
   };
 
   const handleBuyNowClick = (): void => {
-    handleAddClick();
-    setTimeout(goCart, 1000);
+    if (!basket.products.some((product) => product.id === productId)) {
+      handleAddClick();
+    }
+    setTimeout(redirectToCart, 100);
   };
 
   useEffect(() => {

@@ -1,10 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ProductCards.module.scss';
 import '../../styles/fonts.scss';
 import { Card } from '../Card/Card';
+import LocalStorage from '../../utils/LocalStorage';
 import { ProductCardsProps } from '../../types/Product';
+import { StorageKey } from '../../interfaces/StorageKey';
+import { Basket } from '../../interfaces/Basket';
 
-const ProductCards = ({ products }: ProductCardsProps) => {
+const defaultBasket: Basket = {
+  isPromo: false,
+  products: [],
+};
+
+const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
+  const [basket, setBasket] = useState<Basket>(defaultBasket);
+  const storage = LocalStorage.getInstance();
+
+  useEffect(() => {
+    const localBasket = storage.getData<StorageKey, Basket>(StorageKey.basket);
+
+    if (localBasket) {
+      setBasket(localBasket);
+    }
+  }, []);
+
+  const handleAddToCart = (id: number) => {
+    const basketCopy = { ...basket };   
+
+    if (id) {
+      basketCopy.products.push({
+        id: id,
+        quantity: 1,
+      });
+
+      setBasket(basketCopy);
+      storage.setData(StorageKey.basket, basket);
+    }
+  };
+
+  const handleRemoveFromCart = (id: number): void => {
+    const basketCopy = { ...basket };
+    const arr = basketCopy.products;
+
+    arr.forEach((item, i) => {
+      if (id === item.id) {
+        arr.splice(i, 1);
+      }
+    });
+
+    setBasket(basketCopy);
+    storage.setData(StorageKey.basket, basket);
+  };
 
   return (
     <div className={styles.cardsContainer}>
@@ -17,11 +63,15 @@ const ProductCards = ({ products }: ProductCardsProps) => {
             category={card.category}
             title={card.title}
             images={card.images}
+            id={card.id}
+            isExistInBasket={basket.products.some((item) => item.id === card.id)}
+            onAddToCart={handleAddToCart}
+            onRemoveFromCart={handleRemoveFromCart}
           />
         );
       })}
     </div>
   );
-}
+};
 
 export default ProductCards;

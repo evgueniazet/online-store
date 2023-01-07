@@ -48,6 +48,9 @@ const App = () => {
           <Route path='/sandbox'>
             <Sandbox />
           </Route>
+          <Route path='/cart'>
+            <CartPage />
+          </Route>
         </div>
       )}
     </div>

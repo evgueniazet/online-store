@@ -26,7 +26,7 @@ export const ProductImages = ({ images }: ProductImagesProps) => {
             <img
               src={image}
               className={styles.cardImage}
-              key='productImg'
+              key={image}
               onClick={() => {
                 handleImgClick(image);
               }}
