@@ -84,8 +84,10 @@ const FilterBox = ({ queryParams, filterLists, onQueryUpdate }: FilterBoxProps) 
 
   return (
     <div className={styles.filters}>
-      <Button color={ButtonColors.Primary} title={RESET_FILTERS_LABEL} onClick={handleResetFilters} />
-      <Button color={ButtonColors.Primary} title={copyLinkButtonLabel} onClick={handleCopyLink} />
+      <div className={styles.filtersHeader}>
+        <Button color={ButtonColors.Primary} title={RESET_FILTERS_LABEL} onClick={handleResetFilters} />
+        <Button color={ButtonColors.Primary} title={copyLinkButtonLabel} onClick={handleCopyLink} />
+      </div>
       <FilterList title={filterCateroriesTitle} listItems={filterCategoriesList} handleFilterChange={handleChangeCategory} />
       <FilterList title={filterBrandsTitle} listItems={filterBrandsList} handleFilterChange={handleChangeBrand} />
 
