@@ -6,13 +6,16 @@ const ShowcaseLayout = ({ children }: PageProps) => {
   const [filterBox, productsUtilityPanel, productCards] = Children.toArray(children);
 
   return (
-    <div className={styles.main}>
-      {filterBox}
-      <div className={styles.cards}>
-        {productsUtilityPanel}  
-        {productCards}
+    <section className={styles.mainWrapper}>
+      <div className={styles.mainDecoration} />
+      <div className={styles.main}>
+        {filterBox}
+        <div className={styles.cards}>
+          {productsUtilityPanel}
+          {productCards}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
