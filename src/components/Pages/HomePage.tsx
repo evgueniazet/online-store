@@ -5,7 +5,7 @@ import Link from '../Link/Link';
 import styles from './Home.module.scss';
 import { IconBasket, IconStore } from '../../icons/icons';
 import { Card } from '../Card/Card';
-import { Product } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 import { Footer } from '../Footer/Footer';
 
 const HomePage = ({ queryParams }: PageProps) => {
