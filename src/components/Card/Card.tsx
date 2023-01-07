@@ -1,18 +1,17 @@
 import React from 'react';
 import styles from '../Card/Card.module.scss';
-import { Product } from '../../interfaces/Product';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
+import { CardProp } from '../../interfaces/Product';
 
-export const Card: React.FC<Product> = ({
+export const Card: React.FC<CardProp> = ({
   title,
   images,
   brand,
   category,
   price,
-  id,
-  key,
-}: Product) => {
+  id
+}: CardProp) => {
   const handleClickCart = (): void => {
     location.href = '/cart';
   };
@@ -23,9 +22,8 @@ export const Card: React.FC<Product> = ({
 
   return (
     <div className={styles.card}>
-      {key}
       <div className={styles.cardTitle}>{title}</div>
-      <img src={images[0]} className={styles.cardImg} />
+      <img src={images[0]} className={styles.cardImg} alt={title} />
       <div className={styles.cardInfoWrapper}>
         <div className={styles.cardInfo}>
           <span>Category: {category}</span>

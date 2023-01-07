@@ -1,4 +1,4 @@
-export interface Product {
+export interface CardProp {
   brand: string;
   category: string;
   description?: string;
@@ -10,5 +10,4 @@ export interface Product {
   rating?: number;
   stock?: number;
   images: string[];
-  key: string;
 }

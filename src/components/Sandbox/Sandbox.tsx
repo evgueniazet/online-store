@@ -10,6 +10,15 @@ import { SelectOption } from '../../interfaces/SelectOption';
 import { MultiRangeSliderData } from '../../interfaces/MultiRangeSliderData';
 import { RangePicker } from '../RangePicker/RangePicker';
 import { MultiRangeSlider } from '../MultiRangeSlider/MultiRangeSlider';
+import ShowcaseLayout from '../ShowcaseLayout/ShowcaseLayout';
+import { PageProps } from '../../types/Page';
+import ProductCards from '../ProductCards/ProductCards';
+import ProductsUtilityPanel from '../ProductsUtilityPanel/ProductsUtilityPanel';
+import FilterBox from '../FilterBox/FilterBox';
+import DataService from '../../utils/DataService';
+import { CardProp } from '../../interfaces/Product';
+import { SortOptions } from '../../types/SortOptions';
+import { FilterLists } from '../../types/FilterList';
 
 const OPTIONS = [
   {
@@ -30,7 +39,7 @@ const OPTIONS = [
   },
 ];
 
-export const Sandbox = () => {
+export const Sandbox = ({ queryParams }: PageProps) => {
   const [value, setValue] = React.useState('123');
   const [isCheckedA, setIsCheckedA] = useState<boolean>(false);
   const [isCheckedB, setIsCheckedB] = useState<boolean>(false);
@@ -61,6 +70,29 @@ export const Sandbox = () => {
     setRange(event.target.value);
   };
 
+  // For ShowcaseLayout :Start
+
+  const dataService: DataService = DataService.getInstance();
+
+  const { products: initProducts, total: initTotal, sort: initSort, filterLists: initFiltrLists, search: initSearch } = dataService.getData(queryParams);
+
+  const [products, setProducts] = useState<CardProp[]>(initProducts);
+  const [total, setTotal] = useState<number>(initTotal);
+  const [sort, setSort] = useState<SortOptions>(initSort);
+  const [filterLists, setFilterLists] = useState<FilterLists>(initFiltrLists);
+  const [search, setSearch] = useState<string>(initSearch);
+
+  const handleQueryUpdate = (queryParams: URLSearchParams) => {
+    const { products, total, sort, filterLists, search } = dataService.getData(queryParams);
+    setProducts(products);
+    setTotal(total);
+    setSort(sort);
+    setFilterLists(filterLists);
+    setSearch(search);
+  }
+
+  // For ShowcaseLayout :End
+
   return (
     <div className={styles.app}>
       Awesome store app!!!
@@ -76,6 +108,12 @@ export const Sandbox = () => {
         max={1000}
         onChange={({ min, max }: MultiRangeSliderData) => console.log(`min = ${min}, max = ${max}`)}
       />
+
+      <ShowcaseLayout queryParams={queryParams}>
+        <FilterBox queryParams={queryParams} filterLists={filterLists} onQueryUpdate={handleQueryUpdate} />
+        <ProductsUtilityPanel queryParams={queryParams} total={total} sort={sort} search={search} onQueryUpdate={handleQueryUpdate} />
+        <ProductCards queryParams={queryParams} products={products} />
+      </ShowcaseLayout>
     </div>
   );
 };

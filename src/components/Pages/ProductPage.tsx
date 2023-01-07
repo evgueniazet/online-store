@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Product } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 import { ProductImages } from '../ProductImages/ProductImages';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';

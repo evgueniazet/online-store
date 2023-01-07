@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.filters {
+  padding: 10px;
+  min-width: 250px;
+  height: 100%;
+  overflow: auto;
+  border: 1px solid $primaryLight;
+  border-radius: 10px;
+  background-color: $primary;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.filtersHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+filterHeaderButton {
+  padding: 2px 20px;
+
+  &:not(:nth-child(1)) {
+    margin-left: 5px;
+  }
+}

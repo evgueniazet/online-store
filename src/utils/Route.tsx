@@ -3,8 +3,7 @@ import { RouteProps } from '../types/Route';
 
 const Route = ({ path, children }: RouteProps) => {
   const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const queryParams = Object.fromEntries(urlParams.entries());
+  const queryParams = new URLSearchParams(queryString);
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
   const onLocationChange = () => {
@@ -31,6 +30,63 @@ const Route = ({ path, children }: RouteProps) => {
       {currentPath === path? childrenWithQuery: null}
     </>
   );
+}
+
+export const redirectTo = (linkTo: string,  searchParams?: URLSearchParams) => {
+  const url = new URL(linkTo);
+  if (searchParams?.toString()) {
+    url.search = searchParams.toString();
+  } 
+
+  window.history.pushState({}, '', url);
+}
+
+export const resetQueryParams = (currentQuery: URLSearchParams) => {
+  const keys = currentQuery.keys();
+  for (const key of Array.from(keys)) {
+    currentQuery.delete(key);
+  }
+
+  return currentQuery;
+}
+
+export const toggleFilterParam = (currentQuery: URLSearchParams, key: string, param: string) => {
+  if (currentQuery.has(key)) {
+    const paramsString = currentQuery.get(key);
+    if (paramsString) {
+      const params = paramsString.split(':');
+      const paramIndex = params.indexOf(param);
+      if (paramIndex >= 0) {
+        params.splice(paramIndex, 1);
+      } else {
+        params.push(param); 
+      }
+
+      if (params.length) {
+        currentQuery.set(key, params.join(':'));
+      } else {
+        currentQuery.delete(key);
+      }   
+    }
+  } else {
+    currentQuery.append(key, param);
+  }
+
+  return currentQuery;
+}
+
+export const toggleSingleParam = (currentQuery: URLSearchParams, key: string, param: string) => {
+  if (currentQuery.has(key)) {
+    if (param) {
+      currentQuery.set(key, param);
+    } else {
+      currentQuery.delete(key);
+    }
+  } else {
+    currentQuery.append(key, param);
+  }
+
+  return currentQuery;
 }
 
 export default Route;
