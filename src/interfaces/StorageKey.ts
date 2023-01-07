@@ -1,4 +1,5 @@
 export enum StorageKey {
-  backet = 'backet'
+  backet = 'backet',
+  basket = 'basket',
   // TODO: Add additional storage keys here
 }

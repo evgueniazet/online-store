@@ -4,19 +4,23 @@ import { StorageKey } from '../interfaces/StorageKey';
 class LocalStorage implements Storage {
   private static instance: LocalStorage;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): LocalStorage {
     if (!LocalStorage.instance) {
-      LocalStorage.instance = new LocalStorage;
+      LocalStorage.instance = new LocalStorage();
     }
 
     return LocalStorage.instance;
   }
 
-  public getData<K extends StorageKey, T>(key: K) {
-    const data = localStorage.getItem(key) || '';
-    return JSON.parse(data) as T;
+  public getData<K extends StorageKey, T>(key: K): T | null {
+    const data = localStorage.getItem(key) || null;
+
+    if (typeof data === 'string') {
+      return JSON.parse(data) as T;
+    }
+    return null;
   }
 
   public setData<K extends StorageKey, T>(key: K, data: T) {

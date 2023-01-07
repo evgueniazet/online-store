@@ -26,7 +26,6 @@ const App = () => {
       <Route path="/sandbox">
         <Sandbox />
       </Route>
-
     </div>
   );
 };

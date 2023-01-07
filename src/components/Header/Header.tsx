@@ -8,8 +8,10 @@ export const Header: React.FC<HeaderProps> = ({ price }: HeaderProps) => {
     <header className={styles.headerWrapper}>
       <div className={styles.header}>
         <div className={styles.headerLogo}>
-          <IconStore className={styles.headerLogoIcon} />
-          <span className={styles.headerLogoTitle}>Online Store</span>
+          <a href='/'>
+            <IconStore className={styles.headerLogoIcon} />
+            <span className={styles.headerLogoTitle}>Online Store</span>
+          </a>
         </div>
         <span className={styles.headerText}> Total: {price}</span>
         <div className={styles.basketWrapper}>

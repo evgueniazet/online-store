@@ -8,19 +8,66 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Product } from '../../interfaces/Product';
 import { ProductImages } from '../ProductImages/ProductImages';
+import LocalStorage from '../../utils/LocalStorage';
+import { StorageKey } from '../../interfaces/StorageKey';
+import { Basket } from '../../interfaces/Basket';
+import { BasketProduct } from '../../interfaces/BasketProduct';
+
+const defaultBasket: Basket = {
+  isPromo: false,
+  products: [],
+};
 
 const ProductPage = ({ queryParams }: PageProps) => {
   const [card, setCard] = useState<Product | null>(null);
+  const [basket, setBasket] = useState<Basket>(defaultBasket);
+  const storage = LocalStorage.getInstance();
 
-  const handleClick = (): void => {
-    console.log('click');
+  const goCart = () => {
+    window.location.assign('/cart');
+  };
+
+  const handleAddClick = (): void => {
+    const basketCopy = { ...basket };
+
+    if (queryParams?.productId) {
+      basketCopy.products.push({
+        id: queryParams.productId,
+        quantity: 1,
+      });
+
+      setBasket(basketCopy);
+      storage.setData(StorageKey.basket, basket);
+    }
+  };
+
+  const handleRemoveClick = (): void => {
+    const basketCopy = { ...basket };
+    const arr = basketCopy.products;
+
+    arr.forEach((item, i) => {
+      if (queryParams?.productId === item.id) {
+        arr.splice(i, 1);
+      }
+    });
+
+    setBasket(basketCopy);
+    storage.setData(StorageKey.basket, basket);
+  };
+
+  const handleBuyNowClick = (): void => {
+    handleAddClick();
+    setTimeout(goCart, 1000);
   };
 
   useEffect(() => {
-    const currentUrl = new URL(window.location.href);
-    const productId = currentUrl.searchParams.get('productId');
+    const localBasket = storage.getData<StorageKey, Basket>(StorageKey.basket);
 
-    fetch(`https://dummyjson.com/products/${productId}`)
+    if (localBasket) {
+      setBasket(localBasket);
+    }
+
+    fetch(`https://dummyjson.com/products/${queryParams?.productId}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -72,17 +119,25 @@ const ProductPage = ({ queryParams }: PageProps) => {
               <div className={styles.cardContent}>
                 <div className={styles.cardButtonsWrapper}>
                   <div>Price:{card.price}$</div>
-                  <Button
-                    title='Add to cart'
-                    color={ButtonColors.Primary}
-                    onClick={handleClick}
-                    className={styles.cardButton}
-                  />
-
+                  {basket.products.some((product) => product.id === queryParams?.productId) ? (
+                    <Button
+                      title='Remove from cart'
+                      color={ButtonColors.Primary}
+                      onClick={handleRemoveClick}
+                      className={styles.cardButton}
+                    />
+                  ) : (
+                    <Button
+                      title='Add to cart'
+                      color={ButtonColors.Primary}
+                      onClick={handleAddClick}
+                      className={styles.cardButton}
+                    />
+                  )}
                   <Button
                     title='Buy now'
                     color={ButtonColors.Primary}
-                    onClick={handleClick}
+                    onClick={handleBuyNowClick}
                     className={styles.cardButton}
                   />
                 </div>
