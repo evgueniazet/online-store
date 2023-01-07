@@ -1,4 +1,4 @@
 export interface BasketProduct {
-  id: string;
+  id: string | null;
   quantity: number;
 }

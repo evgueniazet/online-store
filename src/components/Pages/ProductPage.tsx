@@ -12,6 +12,7 @@ import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { BasketProduct } from '../../interfaces/BasketProduct';
+import { SearchQueryKeys } from '../../types/SearchQueryKeys';
 
 const defaultBasket: Basket = {
   isPromo: false,
@@ -19,9 +20,10 @@ const defaultBasket: Basket = {
 };
 
 const ProductPage = ({ queryParams }: PageProps) => {
+  const productId = queryParams?.get(SearchQueryKeys.productId);
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
-  const storage = LocalStorage.getInstance();
+  const storage = LocalStorage.getInstance();  
 
   const goCart = () => {
     window.location.assign('/cart');
@@ -30,9 +32,9 @@ const ProductPage = ({ queryParams }: PageProps) => {
   const handleAddClick = (): void => {
     const basketCopy = { ...basket };
 
-    if (queryParams?.productId) {
+    if (productId) {
       basketCopy.products.push({
-        id: queryParams.productId,
+        id: productId,
         quantity: 1,
       });
 
@@ -46,7 +48,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
     const arr = basketCopy.products;
 
     arr.forEach((item, i) => {
-      if (queryParams?.productId === item.id) {
+      if (productId === item.id) {
         arr.splice(i, 1);
       }
     });
@@ -67,7 +69,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
       setBasket(localBasket);
     }
 
-    fetch(`https://dummyjson.com/products/${queryParams?.productId}`)
+    fetch(`https://dummyjson.com/products/${productId}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -119,7 +121,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
               <div className={styles.cardContent}>
                 <div className={styles.cardButtonsWrapper}>
                   <div>Price:{card.price}$</div>
-                  {basket.products.some((product) => product.id === queryParams?.productId) ? (
+                  {basket.products.some((product) => product.id === productId) ? (
                     <Button
                       title='Remove from cart'
                       color={ButtonColors.Primary}

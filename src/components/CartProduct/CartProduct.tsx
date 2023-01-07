@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../CartProduct/CartProduct.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
-import { Product } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 
 const handleClick = (): void => {
   console.log('click');
@@ -13,7 +13,6 @@ interface CartProduct {
 }
 
 export const CartProduct: React.FC<CartProduct> = ({ product }: CartProduct) => {
-  console.log('product', product);
   
   return (
     <div className={styles.product}>

@@ -11,7 +11,7 @@ import LocalStorage from '../../utils/LocalStorage';
 import { BasketProduct } from '../../interfaces/BasketProduct';
 import { CartProduct } from '../CartProduct/CartProduct';
 import { Basket } from '../../interfaces/Basket';
-import { Product } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 
 const defaultBasket: Basket = {
   isPromo: false,
