@@ -3,17 +3,34 @@ import styles from '../CartProduct/CartProduct.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Product } from '../../types/Product';
-
-const handleClick = (): void => {
-  console.log('click');
-};
+import { Basket } from '../../interfaces/Basket';
 
 interface CartProduct {
   product: Product;
+  onAddProduct: (id: number) => void;
+  onRemoveProduct: (id: number) => void;
+  quantity: number;
 }
 
-export const CartProduct: React.FC<CartProduct> = ({ product }: CartProduct) => {
-  
+const defaultBasket: Basket = {
+  isPromo: false,
+  products: [],
+};
+
+export const CartProduct: React.FC<CartProduct> = ({
+  product,
+  onAddProduct,
+  onRemoveProduct,
+  quantity,
+}: CartProduct) => {
+  const handleAddProduct = (): void => {
+    onAddProduct(product.id);
+  };
+
+  const handleRemoveProduct = (): void => {
+    onRemoveProduct(product.id);
+  };
+
   return (
     <div className={styles.product}>
       <span className={styles.productNumber}>1</span>
@@ -28,17 +45,17 @@ export const CartProduct: React.FC<CartProduct> = ({ product }: CartProduct) => 
       </div>
       <div className={styles.productSum}>
         <Button
-          title='<'
+          title='-'
           className={styles.productButton}
           color={ButtonColors.Primary}
-          onClick={handleClick}
+          onClick={handleRemoveProduct}
         />
-        <span className={styles.productAmount}>1</span>
+        <span className={styles.productAmount}>{quantity}</span>
         <Button
-          title='>'
+          title='+'
           className={styles.productButton}
           color={ButtonColors.Primary}
-          onClick={handleClick}
+          onClick={handleAddProduct}
         />
       </div>
     </div>

@@ -12,11 +12,7 @@ import { BasketProduct } from '../../interfaces/BasketProduct';
 import { CartProduct } from '../CartProduct/CartProduct';
 import { Basket } from '../../interfaces/Basket';
 import { Product } from '../../types/Product';
-
-const defaultBasket: Basket = {
-  isPromo: false,
-  products: [],
-};
+import { defaultBasket } from '../../variables/variables';
 
 const CartPage = ({ queryParams }: PageProps) => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -35,6 +31,46 @@ const CartPage = ({ queryParams }: PageProps) => {
 
   const handleClick = (): void => {
     console.log('click');
+  };
+
+  const handleAddProduct = (id: number): void => {
+    const basketCopy = { ...basket };
+    const arr = basketCopy.products;
+
+    arr.forEach((item) => {
+      if (id === item.id) {
+        item.quantity = item.quantity + 1;
+      }
+    });
+
+    setBasket(basketCopy);
+    storage.setData(StorageKey.basket, basketCopy);
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const handleRemoveProduct = (id: number): void => {
+    const basketCopy = { ...basket };
+    const productsCopy = [...products];
+    const arr = basketCopy.products;
+
+    arr.forEach((item, idx) => {
+      if (id === item.id) {
+        if (item.quantity > 1) {
+          item.quantity = item.quantity - 1;
+        } else {
+          arr.splice(idx, 1);
+          const productIndex = productsCopy.findIndex((product) => {
+            return product.id === id;
+          });
+          productsCopy.splice(productIndex, 1);
+        }
+      }
+    });
+
+    setBasket(basketCopy);
+    setProducts(productsCopy);
+    storage.setData(StorageKey.basket, basketCopy);
+    window.dispatchEvent(new Event('storage'));
   };
 
   useEffect(() => {
@@ -94,7 +130,21 @@ const CartPage = ({ queryParams }: PageProps) => {
                 </div>
               )}
               {products.map((product: Product) => {
-                return <CartProduct product={product} key={product.id} />;
+                return (
+                  <CartProduct
+                    onAddProduct={handleAddProduct}
+                    onRemoveProduct={handleRemoveProduct}
+                    product={product}
+                    key={product.id}
+                    quantity={
+                      basket.products[
+                        basket.products.findIndex((element) => {
+                          return product.id === element.id;
+                        })
+                      ]?.quantity
+                    }
+                  />
+                );
               })}
             </div>
           </div>

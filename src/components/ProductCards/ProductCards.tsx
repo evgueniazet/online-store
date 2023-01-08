@@ -6,11 +6,8 @@ import LocalStorage from '../../utils/LocalStorage';
 import { ProductCardsProps } from '../../types/Product';
 import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
+import { defaultBasket } from '../../variables/variables';
 
-const defaultBasket: Basket = {
-  isPromo: false,
-  products: [],
-};
 
 const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
   const [basket, setBasket] = useState<Basket>(defaultBasket);
@@ -35,6 +32,7 @@ const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
 
       setBasket(basketCopy);
       storage.setData(StorageKey.basket, basket);
+      window.dispatchEvent(new Event('storage'));
     }
   };
 
@@ -50,6 +48,7 @@ const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
 
     setBasket(basketCopy);
     storage.setData(StorageKey.basket, basket);
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (

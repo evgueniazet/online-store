@@ -13,17 +13,14 @@ import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { BasketProduct } from '../../interfaces/BasketProduct';
 import { SearchQueryKeys } from '../../types/SearchQueryKeys';
+import { defaultBasket } from '../../variables/variables';
 
-const defaultBasket: Basket = {
-  isPromo: false,
-  products: [],
-};
 
 const ProductPage = ({ queryParams }: PageProps) => {
-  const productId = Number(queryParams?.get(SearchQueryKeys.productId));  
+  const productId = Number(queryParams?.get(SearchQueryKeys.productId));
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
-  const storage = LocalStorage.getInstance();  
+  const storage = LocalStorage.getInstance();
 
   const redirectToCart = () => {
     window.location.href = '/cart';
@@ -40,6 +37,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
 
       setBasket(basketCopy);
       storage.setData(StorageKey.basket, basket);
+      window.dispatchEvent(new Event('storage'));
     }
   };
 
@@ -55,11 +53,13 @@ const ProductPage = ({ queryParams }: PageProps) => {
 
     setBasket(basketCopy);
     storage.setData(StorageKey.basket, basket);
+    window.dispatchEvent(new Event('storage'));
   };
 
   const handleBuyNowClick = (): void => {
     if (!basket.products.some((product) => product.id === productId)) {
       handleAddClick();
+      window.dispatchEvent(new Event('storage'));
     }
     setTimeout(redirectToCart, 100);
   };
