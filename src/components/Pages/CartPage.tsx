@@ -151,8 +151,20 @@ const CartPage = ({ queryParams }: PageProps) => {
           </div>
           <div className={styles.sum}>
             <span className={styles.sumTitle}>Summary</span>
-            <span className={styles.sumProducts}>Products: 0</span>
-            <span className={styles.totalSum}>Total: 0 $</span>
+            <span className={styles.sumProducts}>
+              Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
+            </span>
+            <span className={styles.totalSum}>
+              Total:{' '}
+              {products
+                .filter((product) => basket.products.some((item) => item.id === product.id))
+                .reduce((a, b) => {
+                  const itemsQuantity =
+                    basket?.products.find((item) => item.id === b.id)?.quantity || 0;
+                  return a + b.price * itemsQuantity;
+                }, 0)}
+              $
+            </span>
             <span className={styles.totalSum}>Promo code:</span>
             <TextInput
               className={styles.sumTextInput}
