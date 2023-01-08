@@ -129,13 +129,14 @@ const CartPage = ({ queryParams }: PageProps) => {
                   <span>Cart is empty!</span>
                 </div>
               )}
-              {products.map((product: Product) => {
+              {products.map((product: Product, idx: number) => {
                 return (
                   <CartProduct
                     onAddProduct={handleAddProduct}
                     onRemoveProduct={handleRemoveProduct}
                     product={product}
                     key={product.id}
+                    index={idx}
                     quantity={
                       basket.products[
                         basket.products.findIndex((element) => {

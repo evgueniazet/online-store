@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from '../CartProduct/CartProduct.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Product } from '../../types/Product';
-import { Basket } from '../../interfaces/Basket';
 
 interface CartProduct {
   product: Product;
   onAddProduct: (id: number) => void;
   onRemoveProduct: (id: number) => void;
   quantity: number;
+  index: number;
 }
-
-const defaultBasket: Basket = {
-  isPromo: false,
-  products: [],
-};
 
 export const CartProduct: React.FC<CartProduct> = ({
   product,
   onAddProduct,
   onRemoveProduct,
   quantity,
+  index,
 }: CartProduct) => {
   const handleAddProduct = (): void => {
     onAddProduct(product.id);
@@ -33,7 +29,7 @@ export const CartProduct: React.FC<CartProduct> = ({
 
   return (
     <div className={styles.product}>
-      <span className={styles.productNumber}>1</span>
+      <span className={styles.productNumber}>{index + 1}</span>
       <img src={product.images[0]} className={styles.productImg} />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{product.title}</span>
