@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../Card/Card.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
-import { CardProp } from '../../interfaces/Product';
+import { CardProps } from '../../interfaces/CardProps';
 
-export const Card: React.FC<CardProp> = ({
+export const Card: React.FC<CardProps> = ({
   title,
   images,
   brand,
   category,
   price,
-  id
-}: CardProp) => {
-  const handleClickCart = (): void => {
-    location.href = '/cart';
+  id,
+  isExistInBasket,
+  onAddToCart,
+  onRemoveFromCart,
+}: CardProps) => {
+  const handleClickAddToCart = (): void => {
+    onAddToCart(id);
   };
 
-  const handleClickProductPage = (): void => {
+  const handleClickRemoveFromCart = (): void => {
+    onRemoveFromCart(id);
+  };
+
+  const handleClickDetails = (): void => {
     location.href = `/product?productId=${id}`;
   };
 
@@ -32,17 +39,26 @@ export const Card: React.FC<CardProp> = ({
         </div>
       </div>
       <div className={styles.cardButtons}>
-        <Button
-          title='Add to cart'
-          color={ButtonColors.Primary}
-          className={styles.cardButton}
-          onClick={handleClickCart}
-        />
+        {isExistInBasket ? (
+          <Button
+            title='Remove from cart'
+            color={ButtonColors.Primary}
+            className={styles.cardButton}
+            onClick={handleClickRemoveFromCart}
+          />
+        ) : (
+          <Button
+            title='Add to cart'
+            color={ButtonColors.Primary}
+            className={styles.cardButton}
+            onClick={handleClickAddToCart}
+          />
+        )}
         <Button
           title='Details'
           color={ButtonColors.Primary}
           className={styles.cardButton}
-          onClick={handleClickProductPage}
+          onClick={handleClickDetails}
         />
       </div>
     </div>

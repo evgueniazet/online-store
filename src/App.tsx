@@ -4,6 +4,7 @@ import Route from './utils/Route';
 import HomePage from './components/Pages/HomePage';
 import CheckoutPage from './components/Pages/CheckoutPage';
 import ProductPage from './components/Pages/ProductPage';
+import CartPage from './components/Pages/CartPage';
 import { Sandbox } from './components/Sandbox/Sandbox';
 import DataService from './utils/DataService';
 import productsData from './utils/config/data';
@@ -46,6 +47,9 @@ const App = () => {
           </Route>
           <Route path='/sandbox'>
             <Sandbox />
+          </Route>
+          <Route path='/cart'>
+            <CartPage />
           </Route>
         </div>
       )}

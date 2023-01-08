@@ -1,3 +1,3 @@
 export interface HeaderProps {
-  price: number;
+  queryParams?: URLSearchParams;
 }
