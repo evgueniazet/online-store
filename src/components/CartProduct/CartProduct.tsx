@@ -6,10 +6,11 @@ import { Product } from '../../types/Product';
 
 interface CartProduct {
   product: Product;
-  onAddProduct: (id: number) => void;
+  onAddProduct: (id: number, stock: number) => void;
   onRemoveProduct: (id: number) => void;
   quantity: number;
   index: number;
+  stock: number;
 }
 
 export const CartProduct: React.FC<CartProduct> = ({
@@ -18,9 +19,10 @@ export const CartProduct: React.FC<CartProduct> = ({
   onRemoveProduct,
   quantity,
   index,
-}: CartProduct) => {  
+  stock,
+}: CartProduct) => {
   const handleAddProduct = (): void => {
-    onAddProduct(product.id);
+    onAddProduct(product.id, product.stock);
   };
 
   const handleRemoveProduct = (): void => {

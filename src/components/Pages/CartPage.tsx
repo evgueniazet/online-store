@@ -33,13 +33,13 @@ const CartPage = ({ queryParams }: PageProps) => {
     console.log('click');
   };
 
-  const handleAddProduct = (id: number): void => {
+  const handleAddProduct = (id: number, stock: number): void => {
     const basketCopy = { ...basket };
     const arr = basketCopy.products;
 
     arr.forEach((item) => {
       if (id === item.id) {
-        item.quantity = item.quantity + 1;
+        if (item.quantity < stock) item.quantity = item.quantity + 1;
       }
     });
 
@@ -137,6 +137,7 @@ const CartPage = ({ queryParams }: PageProps) => {
                     product={product}
                     key={product.id}
                     index={idx}
+                    stock={product.stock}
                     quantity={
                       basket.products[
                         basket.products.findIndex((element) => {
