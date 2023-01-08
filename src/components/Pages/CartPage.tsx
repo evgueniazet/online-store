@@ -92,7 +92,7 @@ const CartPage = ({ queryParams }: PageProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <Header price={1000} />
+      <Header />
       <section className={styles.mainWrapper}>
         <div className={styles.mainDecoration} />
         <div className={styles.main}>

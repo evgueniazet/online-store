@@ -94,8 +94,7 @@ const ProductPage = ({ queryParams }: PageProps) => {
     <div className={styles.wrapper}>
       {/* TODO: Put conditional loader here while data is fetching */}
       {/* TODO: Put Home template component here with fetched data as props */}
-      <Header price={1000} />
-
+      <Header />
       <section className={styles.mainWrapper}>
         <div className={styles.mainDecoration} />
         <div className={styles.main}>

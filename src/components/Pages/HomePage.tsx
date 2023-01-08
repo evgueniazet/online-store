@@ -14,8 +14,13 @@ import ProductCards from '../ProductCards/ProductCards';
 
 const HomePage = ({ queryParams }: PageProps) => {
   const dataService: DataService = DataService.getInstance();
-
-  const { products: initProducts, total: initTotal, sort: initSort, filterLists: initFiltrLists, search: initSearch } = dataService.getData(queryParams);
+  const {
+    products: initProducts,
+    total: initTotal,
+    sort: initSort,
+    filterLists: initFiltrLists,
+    search: initSearch,
+  } = dataService.getData(queryParams);
 
   const [products, setProducts] = useState<Product[]>(initProducts);
   const [total, setTotal] = useState<number>(initTotal);
@@ -30,14 +35,24 @@ const HomePage = ({ queryParams }: PageProps) => {
     setSort(sort);
     setFilterLists(filterLists);
     setSearch(search);
-  }
+  };
 
   return (
-    <CommonLayout >
-      <Header price={1000} />
+    <CommonLayout>
+      <Header queryParams={queryParams} />
       <ShowcaseLayout queryParams={queryParams}>
-        <FilterBox queryParams={queryParams} filterLists={filterLists} onQueryUpdate={handleQueryUpdate} />
-        <ProductsUtilityPanel queryParams={queryParams} total={total} sort={sort} search={search} onQueryUpdate={handleQueryUpdate} />
+        <FilterBox
+          queryParams={queryParams}
+          filterLists={filterLists}
+          onQueryUpdate={handleQueryUpdate}
+        />
+        <ProductsUtilityPanel
+          queryParams={queryParams}
+          total={total}
+          sort={sort}
+          search={search}
+          onQueryUpdate={handleQueryUpdate}
+        />
         <ProductCards queryParams={queryParams} products={products} />
       </ShowcaseLayout>
       <Footer />
