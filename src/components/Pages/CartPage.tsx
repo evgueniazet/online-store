@@ -30,7 +30,6 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
         const itemsQuantity = basket?.products.find((item) => item.id === b.id)?.quantity || 0;
         return a + b.price * itemsQuantity;
       }, 0);
-    setPrice(summaryPrice);
     return summaryPrice;
   };
 
@@ -73,6 +72,19 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
     console.log('click');
   };
 
+  const handleRemovePromo = (promoCode: string): void => {
+    const basketCopy: Basket = { ...basket };
+    const newArrPromo = basketCopy.promo.filter((promo) => {
+      return promo.code !== promoCode;
+    });
+
+    basketCopy.promo.splice(0, basketCopy.promo.length);
+    newArrPromo.map((item) => {
+      basketCopy.promo.push(item);
+    });
+    setBasket(basketCopy);
+  };
+
   const handleAddProduct = (id: number, stock: number): void => {
     const basketCopy: Basket = { ...basket };
     const arr: BasketProduct[] = basketCopy.products;
@@ -83,7 +95,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
       }
     });
     setBasket(basketCopy);
-    getPrice(basket);
+    setPrice(getPrice(basket));
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
@@ -109,7 +121,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
 
     setBasket(basketCopy);
     setProducts(productsCopy);
-    getPrice(basket);
+    setPrice(getPrice(basket));
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
@@ -119,9 +131,6 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
 
     if (basket) {
       setBasket(basket);
-      const summaryPrice = getPrice(basket);
-      setPrice(summaryPrice);
-
       const urls: string[] = basket.products.map(
         (item) => `https://dummyjson.com/products/${item.id}`,
       );
@@ -131,6 +140,8 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
         .then((response) => Promise.all(response.map((r) => r.json())))
         .then((results: Product[]) => {
           setProducts(results);
+          const summaryPrice = getPrice(basket);
+          setPrice(summaryPrice);
         });
     }
   }, []);
@@ -216,12 +227,13 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
               {basket.promo.map((item) => {
                 return (
                   <div key={item.discount} className={styles.promoCode}>
-                    `${item.code}: -${item.discount}$ `
+                    {`${item.code}: -${item.discount}$ `}
                     <Button
                       key={item.code}
                       title='-'
                       color={ButtonColors.Primary}
-                      onClick={handleClick}
+                      className={styles.promoButton}
+                      onClick={() => handleRemovePromo(item.code)}
                     />
                   </div>
                 );
@@ -233,6 +245,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
               onChange={handleChangePromoCode}
               value={promoCode}
             />
+            <span className={styles.promocodes}>Promo: code5, code10, code15</span>
             <Button
               title='Submit promo code'
               className={styles.submitButton}
