@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../Footer/Footer.module.scss';
 import { IconSchool } from '../../icons/icons';
 
-export const Footer = () => {
+export const Footer: React.FC = (): JSX.Element => {
   return (
     <footer className={styles.footerWrapper}>
       <div className={styles.footer}>

@@ -16,13 +16,13 @@ import { SearchQueryKeys } from '../../types/SearchQueryKeys';
 import { defaultBasket } from '../../variables/defaultBasket';
 
 
-const ProductPage = ({ queryParams }: PageProps) => {
-  const productId = Number(queryParams?.get(SearchQueryKeys.productId));
+const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
+  const productId: number = Number(queryParams?.get(SearchQueryKeys.productId));
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
-  const redirectToCart = () => {
+  const redirectToCart = (): void => {
     window.location.href = '/cart';
   };
 
@@ -42,8 +42,8 @@ const ProductPage = ({ queryParams }: PageProps) => {
   };
 
   const handleRemoveClick = (): void => {
-    const basketCopy = { ...basket };
-    const arr = basketCopy.products;
+    const basketCopy: Basket = { ...basket };
+    const arr: BasketProduct[] = basketCopy.products;
 
     arr.forEach((item, i) => {
       if (productId === item.id) {

@@ -15,7 +15,7 @@ import { Product } from '../../types/Product';
 import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
 
-const CartPage = ({ queryParams }: PageProps) => {
+const CartPage = ({ queryParams }: PageProps): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
   const [products, setProducts] = React.useState<Product[]>([]);
   const [limit, setLimit] = React.useState<string>('3');
@@ -31,17 +31,17 @@ const CartPage = ({ queryParams }: PageProps) => {
   };
 
   const handleSubmit = (): void => {
-    const isPromoExist = promo.some((item) => {
+    const isPromoExist: boolean = promo.some((item) => {
       return item.code === promoCode.toUpperCase();
     });
 
     if (isPromoExist) {
-      const isPromoUsed = basket.promo.some((item) => {
+      const isPromoUsed: boolean = basket.promo.some((item) => {
         return item.code === promoCode.toUpperCase();
       });
 
       if (!isPromoUsed) {
-        const basketCopy = { ...basket };
+        const basketCopy: Basket = { ...basket };
         const promoObj = promo.find((elem) => {
           return elem.code === promoCode.toUpperCase();
         });
@@ -62,8 +62,8 @@ const CartPage = ({ queryParams }: PageProps) => {
   };
 
   const handleAddProduct = (id: number, stock: number): void => {
-    const basketCopy = { ...basket };
-    const arr = basketCopy.products;
+    const basketCopy: Basket = { ...basket };
+    const arr: BasketProduct[] = basketCopy.products;
 
     arr.forEach((item) => {
       if (id === item.id) {
@@ -77,9 +77,9 @@ const CartPage = ({ queryParams }: PageProps) => {
   };
 
   const handleRemoveProduct = (id: number): void => {
-    const basketCopy = { ...basket };
-    const productsCopy = [...products];
-    const arr = basketCopy.products;
+    const basketCopy: Basket = { ...basket };
+    const productsCopy: Product[] = [...products];
+    const arr: BasketProduct[] = basketCopy.products;
 
     arr.forEach((item, idx) => {
       if (id === item.id) {
@@ -107,7 +107,9 @@ const CartPage = ({ queryParams }: PageProps) => {
     if (basket) {
       setBasket(basket);
 
-      const urls = basket.products.map((item) => `https://dummyjson.com/products/${item.id}`);
+      const urls: string[] = basket.products.map(
+        (item) => `https://dummyjson.com/products/${item.id}`,
+      );
       const promises = urls.map((url) => fetch(url));
 
       Promise.all(promises)
@@ -194,7 +196,12 @@ const CartPage = ({ queryParams }: PageProps) => {
                 }, 0)}
               $
             </span>
-            <span className={styles.totalSum}>Promo code: {basket.promo.map((item) => { return `${item.code}  `})} </span>
+            <span className={styles.totalSum}>
+              Promo code:{' '}
+              {basket.promo.map((item) => {
+                return `${item.code}  `;
+              })}{' '}
+            </span>
             <TextInput
               className={styles.sumTextInput}
               placeholder='Insert promo code'

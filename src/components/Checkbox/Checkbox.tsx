@@ -8,7 +8,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   isChecked,
   handleChange,
-}: CheckboxProps) => {
+}: CheckboxProps): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>

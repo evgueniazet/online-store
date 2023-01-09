@@ -7,10 +7,11 @@ import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 import DataService from '../../utils/DataService';
+import { Product } from '../../interfaces/Product';
 
-export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
-  const products = dataService.getData(queryParams).products;
+  const products: Product[] = dataService.getData(queryParams).products;
   const storage = LocalStorage.getInstance();
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const [price, setPrice] = useState<number>(0);
@@ -25,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps) => {
     return summaryPrice;
   };
 
-  const handleStorageEvent = () => {
+  const handleStorageEvent = (): void => {
     const basket = storage.getData<StorageKey, Basket>(StorageKey.basket);
 
     if (basket) {
