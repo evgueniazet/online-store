@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './styles/fonts.scss';
 import Route from './utils/Route';
 import HomePage from './components/Pages/HomePage';
-import CheckoutPage from './components/Pages/CheckoutPage';
 import ProductPage from './components/Pages/ProductPage';
 import CartPage from './components/Pages/CartPage';
 import { Sandbox } from './components/Sandbox/Sandbox';
@@ -38,9 +37,6 @@ const App = () => {
         <div>
           <Route path='/'>
             <HomePage />
-          </Route>
-          <Route path='/checkout'>
-            <CheckoutPage />
           </Route>
           <Route path='/product'>
             <ProductPage />
