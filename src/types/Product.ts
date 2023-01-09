@@ -1,4 +1,3 @@
-import { CardProp } from '../interfaces/Product';
 import {CardViewTypes} from '../enums/CardViewType';
 
 export type Product = {

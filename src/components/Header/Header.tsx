@@ -7,7 +7,7 @@ import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 import DataService from '../../utils/DataService';
-import { Product } from '../../interfaces/Product';
+import { Product } from '../../types/Product';
 
 export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();

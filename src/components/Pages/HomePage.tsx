@@ -15,8 +15,6 @@ import { CardViewTypes } from '../../enums/CardViewType';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
 import {MultiRange} from '../../types/FilterBox';
-import {MultiRangeType} from '../../enums/MultiRangeType';
-import {toggleSingleParam} from '../../utils/Route';
 
 const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
   const dataService: DataService = DataService.getInstance();

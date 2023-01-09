@@ -10,15 +10,6 @@ import { SelectOption } from '../../interfaces/SelectOption';
 import { MultiRangeSliderData } from '../../interfaces/MultiRangeSliderData';
 import { RangePicker } from '../RangePicker/RangePicker';
 import { MultiRangeSlider } from '../MultiRangeSlider/MultiRangeSlider';
-import ShowcaseLayout from '../ShowcaseLayout/ShowcaseLayout';
-import { PageProps } from '../../types/Page';
-import ProductCards from '../ProductCards/ProductCards';
-import ProductsUtilityPanel from '../ProductsUtilityPanel/ProductsUtilityPanel';
-import FilterBox from '../FilterBox/FilterBox';
-import DataService from '../../utils/DataService';
-import { Product } from '../../types/Product';
-import { SortOptions } from '../../types/SortOptions';
-import { FilterLists } from '../../types/FilterList';
 
 const OPTIONS = [
   {
@@ -39,7 +30,7 @@ const OPTIONS = [
   },
 ];
 
-export const Sandbox = ({ queryParams }: PageProps) => {
+export const Sandbox = () => {
   const [value, setValue] = React.useState('123');
   const [isCheckedA, setIsCheckedA] = useState<boolean>(false);
   const [isCheckedB, setIsCheckedB] = useState<boolean>(false);

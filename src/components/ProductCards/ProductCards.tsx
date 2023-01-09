@@ -9,7 +9,7 @@ import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 
 
-const ProductCards = ({ products, queryParams, cardViewType  }: ProductCardsProps) => {
+const ProductCards = ({ products, cardViewType  }: ProductCardsProps) => {
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 

@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../Card/Card.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
-// import { CardProp } from '../../interfaces/Product';
 import Link from '../Link/Link';
 import classNames from 'classnames';
 import { CardViewTypes } from '../../enums/CardViewType';
-import { IconBasket } from '../../icons/icons';
+// import { IconBasket } from '../../icons/icons';
 import { CardProps } from '../../interfaces/CardProps';
 
 export const Card: React.FC<CardProps> = ({
-  title,
-  images,
-  brand,
-  category,
-  price,
-  id,
-  isExistInBasket,
-  onAddToCart,
-  onRemoveFromCart,
-                                          cardViewType
-}: CardProps) => {
+                                            title,
+                                            images,
+                                            brand,
+                                            category,
+                                            price,
+                                            id,
+                                            isExistInBasket,
+                                            onAddToCart,
+                                            onRemoveFromCart,
+                                            cardViewType
+                                          }: CardProps) => {
   const handleClickAddToCart = (): void => {
     onAddToCart(id);
   };
