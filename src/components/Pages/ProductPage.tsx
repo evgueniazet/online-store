@@ -6,7 +6,6 @@ import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Product } from '../../interfaces/Product';
 import { ProductImages } from '../ProductImages/ProductImages';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
@@ -14,11 +13,16 @@ import { Basket } from '../../interfaces/Basket';
 import { BasketProduct } from '../../interfaces/BasketProduct';
 import { SearchQueryKeys } from '../../types/SearchQueryKeys';
 import { defaultBasket } from '../../variables/defaultBasket';
+import DataService from '../../utils/DataService';
+import Link from '../Link/Link';
+import { ProductCardProp } from '../../interfaces/ProductCardProp';
 
 
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
-  const productId: number = Number(queryParams?.get(SearchQueryKeys.productId));
-  const [card, setCard] = useState<Product | null>(null);
+  const dataService: DataService = DataService.getInstance();
+  const productId = Number(queryParams?.get(SearchQueryKeys.productId));
+  const product = productId ? dataService.getProductById(Number(productId)) : undefined;
+  const [card, setCard] = useState<ProductCardProp | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
@@ -70,22 +74,16 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
     if (localBasket) {
       setBasket(localBasket);
     }
-
-    fetch(`https://dummyjson.com/products/${productId}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(response);
-      })
-      .then((data) => {
-        setCard(data);
-      })
-      .catch((error: unknown) => {
-        setCard(null);
-      });
+    if(product) {
+      setCard(product);
+    }
   }, []);
 
+  const getHomeUrl = () => {
+
+    return `${window.location.origin}`;
+  }
+  // todo: make nice error layout
   if (!card) {
     return <div>Error</div>;
   }
@@ -99,9 +97,9 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
         <div className={styles.mainDecoration} />
         <div className={styles.main}>
           <div className={styles.breadCrumbs}>
-            <a href='/' className={styles.breadCrumbsItem}>
+            <Link linkTo={getHomeUrl()} className={styles.breadCrumbsItem}>
               Home Page
-            </a>
+            </Link>
             <IconArrow className={styles.breadCrumbsIcon} />
             <a href='#' className={styles.breadCrumbsItem}>
               {card.category}

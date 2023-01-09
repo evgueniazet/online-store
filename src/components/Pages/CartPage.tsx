@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { PageProps } from '../../types/Page';
 import styles from './CartPage.module.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -15,7 +14,7 @@ import { Product } from '../../types/Product';
 import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
 
-const CartPage = ({ queryParams }: PageProps): JSX.Element => {
+const CartPage = (): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
   const [products, setProducts] = React.useState<Product[]>([]);
   const [limit, setLimit] = React.useState<string>('3');

@@ -3,5 +3,6 @@ export enum SearchQueryKeys {
   search = 'search',
   category = 'category',
   brand = 'brand',
+  price = 'price',
   productId = 'productId'
 }
