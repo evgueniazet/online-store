@@ -4,8 +4,8 @@ import { ButtonColors } from '../../enums/ButtonColors';
 import styles from './Button.module.scss';
 import { ButtonProps } from '../../interfaces/ButtonProps';
 
-export const Button: React.FC<ButtonProps> = ({ color, onClick, title, className } : ButtonProps) => {
-  const btnClass = classNames(
+export const Button: React.FC<ButtonProps> = ({ color, onClick, title, className } : ButtonProps): JSX.Element => {
+  const btnClass: string = classNames(
     styles.button,
     className,
     {

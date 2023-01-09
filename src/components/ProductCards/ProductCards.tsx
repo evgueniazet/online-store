@@ -6,7 +6,7 @@ import LocalStorage from '../../utils/LocalStorage';
 import { ProductCardsProps } from '../../types/Product';
 import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
-import { defaultBasket } from '../../variables/variables';
+import { defaultBasket } from '../../variables/defaultBasket';
 
 
 const ProductCards = ({ products, queryParams }: ProductCardsProps) => {

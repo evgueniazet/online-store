@@ -134,11 +134,34 @@
   margin-top: 10px;
 }
 
+.totalSumWithPromo {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-decoration: line-through;
+}
+
+.promoCode {
+  background-color: $primary;
+  border: 1px solid $primaryLight;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.promocodes {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.promoButton {
+  width: 20px;
+  margin: 5px;
+}
+
 .sumTextInput {
   margin-top: 10px;
 }
 
-.sumButton {
+.submitButton {
   width: 100px;
   margin-top: 10px;
   text-transform: uppercase;
@@ -186,7 +209,7 @@
 
   .sum {
     order: -1;
-    width: 100%;
+    width: 50%;
     margin: 0;
   }
 }

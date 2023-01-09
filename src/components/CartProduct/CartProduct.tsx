@@ -20,7 +20,7 @@ export const CartProduct: React.FC<CartProduct> = ({
   quantity,
   index,
   stock,
-}: CartProduct) => {
+}: CartProduct): JSX.Element => {
   const handleAddProduct = (): void => {
     onAddProduct(product.id, product.stock);
   };

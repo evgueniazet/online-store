@@ -1,6 +1,7 @@
 import { BasketProduct } from "./BasketProduct";
+import { Promo } from "./Promo";
 
 export interface Basket {
-  isPromo: false;
+  promo: Promo[];
   products: BasketProduct[];
 }

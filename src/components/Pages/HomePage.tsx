@@ -12,7 +12,7 @@ import FilterBox from '../FilterBox/FilterBox';
 import ProductsUtilityPanel from '../ProductsUtilityPanel/ProductsUtilityPanel';
 import ProductCards from '../ProductCards/ProductCards';
 
-const HomePage = ({ queryParams }: PageProps) => {
+const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
   const dataService: DataService = DataService.getInstance();
   const {
     products: initProducts,
