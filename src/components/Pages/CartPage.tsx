@@ -20,7 +20,19 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
   const [products, setProducts] = React.useState<Product[]>([]);
   const [limit, setLimit] = React.useState<string>('3');
   const [promoCode, setPromoCode] = React.useState<string>('');
+  const [price, setPrice] = React.useState<number>(0);
   const storage = LocalStorage.getInstance();
+
+  const getPrice = (basket: Basket): number => {
+    const summaryPrice = products
+      .filter((product) => basket.products.some((item) => item.id === product.id))
+      .reduce((a, b) => {
+        const itemsQuantity = basket?.products.find((item) => item.id === b.id)?.quantity || 0;
+        return a + b.price * itemsQuantity;
+      }, 0);
+    setPrice(summaryPrice);
+    return summaryPrice;
+  };
 
   const handleChangePromoCode = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPromoCode(e.target.value);
@@ -70,8 +82,8 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
         if (item.quantity < stock) item.quantity = item.quantity + 1;
       }
     });
-
     setBasket(basketCopy);
+    getPrice(basket);
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
@@ -97,6 +109,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
 
     setBasket(basketCopy);
     setProducts(productsCopy);
+    getPrice(basket);
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
@@ -106,6 +119,8 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
 
     if (basket) {
       setBasket(basket);
+      const summaryPrice = getPrice(basket);
+      setPrice(summaryPrice);
 
       const urls: string[] = basket.products.map(
         (item) => `https://dummyjson.com/products/${item.id}`,
@@ -185,21 +200,31 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
             <span className={styles.sumProducts}>
               Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
             </span>
-            <span className={styles.totalSum}>
-              Total:{' '}
-              {products
-                .filter((product) => basket.products.some((item) => item.id === product.id))
-                .reduce((a, b) => {
-                  const itemsQuantity =
-                    basket?.products.find((item) => item.id === b.id)?.quantity || 0;
-                  return a + b.price * itemsQuantity;
-                }, 0)}
-              $
-            </span>
+            {basket.promo.some((item) => item) ? (
+              <>
+                <span className={styles.totalSumWithPromo}>Total:{price}$</span>
+                <span className={styles.totalSum}>
+                  Sum with discount:
+                  {price - (basket.promo.reduce((a, b) => a + b.discount, 0) / 100) * price}$
+                </span>
+              </>
+            ) : (
+              <span className={styles.totalSum}>Total:{price}$</span>
+            )}
             <span className={styles.totalSum}>
               Promo code:{' '}
               {basket.promo.map((item) => {
-                return `${item.code}  `;
+                return (
+                  <div key={item.discount} className={styles.promoCode}>
+                    `${item.code}: -${item.discount}$ `
+                    <Button
+                      key={item.code}
+                      title='-'
+                      color={ButtonColors.Primary}
+                      onClick={handleClick}
+                    />
+                  </div>
+                );
               })}{' '}
             </span>
             <TextInput

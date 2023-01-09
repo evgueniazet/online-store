@@ -134,6 +134,12 @@
   margin-top: 10px;
 }
 
+.totalSumWithPromo {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-decoration: line-through;
+}
+
 .sumTextInput {
   margin-top: 10px;
 }
@@ -186,7 +192,7 @@
 
   .sum {
     order: -1;
-    width: 100%;
+    width: 50%;
     margin: 0;
   }
 }
