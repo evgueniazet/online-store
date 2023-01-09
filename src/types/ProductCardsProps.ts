@@ -1,4 +1,4 @@
-import {CardViewTypes} from '../enums/CardViewType';
+import { CardViewTypes } from '../enums/CardViewType';
 
 export type Product = {
   id: number,

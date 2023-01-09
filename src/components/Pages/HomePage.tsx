@@ -11,32 +11,53 @@ import ShowcaseLayout from '../ShowcaseLayout/ShowcaseLayout';
 import FilterBox from '../FilterBox/FilterBox';
 import ProductsUtilityPanel from '../ProductsUtilityPanel/ProductsUtilityPanel';
 import ProductCards from '../ProductCards/ProductCards';
+import { CardViewTypes } from '../../enums/CardViewType';
+import LocalStorage from '../../utils/LocalStorage';
+import { StorageKey } from '../../interfaces/StorageKey';
+import {MultiRange} from '../../types/FilterBox';
 
 const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
   const dataService: DataService = DataService.getInstance();
+  const localStorage = LocalStorage.getInstance();
+
   const {
     products: initProducts,
     total: initTotal,
     sort: initSort,
-    filterLists: initFiltrLists,
+    filterLists: initFilterLists,
     search: initSearch,
+    cardViewType: initCardViewType,
+    priceRange: initPriceRange
   } = dataService.getData(queryParams);
 
   const [products, setProducts] = useState<Product[]>(initProducts);
   const [total, setTotal] = useState<number>(initTotal);
   const [sort, setSort] = useState<SortOptions>(initSort);
-  const [filterLists, setFilterLists] = useState<FilterLists>(initFiltrLists);
+  const [filterLists, setFilterLists] = useState<FilterLists>(initFilterLists);
   const [search, setSearch] = useState<string>(initSearch);
+  const [cardViewType, setCardViewType] = useState<CardViewTypes | null>(initCardViewType);
+  const [priseRange, setPriseRange] = useState<MultiRange>(initPriceRange);
 
   const handleQueryUpdate = (queryParams: URLSearchParams) => {
-    const { products, total, sort, filterLists, search } = dataService.getData(queryParams);
+    const { products, total, sort, filterLists, search, cardViewType, priceRange } = dataService.getData(queryParams);
     setProducts(products);
     setTotal(total);
     setSort(sort);
     setFilterLists(filterLists);
     setSearch(search);
-  };
+    setCardViewType(cardViewType);
+    setPriseRange(priceRange);
+  }
 
+  const handleSmallViewSwitch = () => {
+    setCardViewType(CardViewTypes.small)
+    localStorage.setData(StorageKey.cardViewType, CardViewTypes.small)
+  }
+
+  const handleBigViewSwitch = () => {
+    setCardViewType(CardViewTypes.big)
+    localStorage.setData(StorageKey.cardViewType, CardViewTypes.big)
+  }
   return (
     <CommonLayout>
       <Header queryParams={queryParams} />
@@ -44,6 +65,7 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
         <FilterBox
           queryParams={queryParams}
           filterLists={filterLists}
+          priseRange={priseRange}
           onQueryUpdate={handleQueryUpdate}
         />
         <ProductsUtilityPanel
@@ -52,8 +74,11 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
           sort={sort}
           search={search}
           onQueryUpdate={handleQueryUpdate}
+          onBigViewSwitch={handleBigViewSwitch}
+          onSmallViewSwitch={handleSmallViewSwitch}
+          cardViewType={cardViewType}
         />
-        <ProductCards queryParams={queryParams} products={products} />
+        <ProductCards queryParams={queryParams} products={products} cardViewType={cardViewType} />
       </ShowcaseLayout>
       <Footer />
     </CommonLayout>

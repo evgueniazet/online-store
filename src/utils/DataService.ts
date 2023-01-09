@@ -5,9 +5,14 @@ import { SortOptions } from '../types/SortOptions';
 import { Data, EnabledFilters, SortField, SortOrders } from '../types/Data';
 import { SearchQueryKeys } from '../types/SearchQueryKeys';
 import { DataProvidible } from '../interfaces/DataProvidible';
+import LocalStorage from './LocalStorage';
+import {CardViewTypes} from '../enums/CardViewType';
+import {StorageKey} from '../interfaces/StorageKey';
+import {MultiRangeType} from '../enums/MultiRangeType';
 
 class DataService implements DataProvidible {
   private static instance: DataService;
+  private localStorage: LocalStorage | undefined;
   private products: Product[] = [];
   private filterListsOptions: FilterListsOptions[] = [];
   private filterLists: FilterLists = {
@@ -28,6 +33,7 @@ class DataService implements DataProvidible {
   public initialiseData(fetchedProducts: Product[]) {
     this.initialiseFilterLists();
     this.products = fetchedProducts;
+    this.localStorage = LocalStorage.getInstance();
     this.buildInitialFilterLists();
   }
 
@@ -42,6 +48,8 @@ class DataService implements DataProvidible {
       sort: SortOptions.none,
       total: this.products.length,
       search: '',
+      cardViewType: CardViewTypes.big,
+      priceRange: null
     };
 
     if (queryParams) {
@@ -72,6 +80,20 @@ class DataService implements DataProvidible {
         }
       }
 
+      if (queryParams.has(SearchQueryKeys.price)) {
+        console.log('PPPPP');
+        const params = queryParams.get(SearchQueryKeys.price)?.split(':');
+        console.log()
+        if (Array.isArray(params)) {
+          const [minVal, maxVal] = params;
+          data.products = data.products.filter((product) => {
+            console.log([minVal, maxVal]);
+              return !!((product[SearchQueryKeys.price] <= Number(maxVal)) && (product[SearchQueryKeys.price] >= Number(minVal)));
+            }
+          );
+        }
+      }
+
       if (queryParams.has(SearchQueryKeys.sort)) {
         const sortQuery = queryParams.get(SearchQueryKeys.sort);
         if (sortQuery) {
@@ -89,9 +111,26 @@ class DataService implements DataProvidible {
       }
       data.filterLists = this.updateFilterLists(data.products, enabledFilters);
       data.total = data.products.length;
+      if (this.localStorage?.getData(StorageKey.cardViewType)) {
+        data.cardViewType = this.localStorage?.getData(StorageKey.cardViewType);
+      }
+
+      data.priceRange = this.updateRange(data.products, MultiRangeType.price);
+
     }
 
     return data;
+  }
+
+  private updateRange(products: Product[], type: MultiRangeType) {
+    if (products.length > 0) {
+      const min = Math.min(...products.map(product => product[type]));
+      const max = Math.max(...products.map(product => product[type]));
+
+      return { min, max };
+    }
+
+    return null;
   }
 
   private initialiseFilterLists() {
