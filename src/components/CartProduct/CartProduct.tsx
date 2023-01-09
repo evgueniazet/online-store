@@ -31,16 +31,19 @@ export const CartProduct: React.FC<CartProduct> = ({
 
   return (
     <div className={styles.product}>
-      <span className={styles.productNumber}>{index + 1}</span>
-      <img src={product.images[0]} className={styles.productImg} />
-      <div className={styles.productInfo}>
-        <span className={styles.productTitle}>{product.title}</span>
-        <span>Description: {product.description}</span>
-        <span>Rating: {product.rating}</span>
-        <span>Discount: {product.discountPercentage}</span>
-        <span>Stock: {product.stock}</span>
-        <span>Price: {product.price}</span>
+      <div className={styles.productInformation}>
+        <span className={styles.productNumber}>{index + 1}</span>
+        <img src={product.images[0]} className={styles.productImg} />
+        <div className={styles.productInfo}>
+          <span className={styles.productTitle}>{product.title}</span>
+          <span>Description: {product.description}</span>
+          <span>Rating: {product.rating}</span>
+          <span>Discount: {product.discountPercentage}</span>
+          <span>Stock: {product.stock}</span>
+          <span>Price: {product.price}</span>
+        </div>
       </div>
+
       <div className={styles.productSum}>
         <Button
           title='-'

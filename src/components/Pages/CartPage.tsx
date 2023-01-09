@@ -207,6 +207,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
             </div>
           </div>
           <div className={styles.sum}>
+            <div className={styles.sumInfo}>
             <span className={styles.sumTitle}>Summary</span>
             <span className={styles.sumProducts}>
               Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
@@ -222,6 +223,9 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
             ) : (
               <span className={styles.totalSum}>Total:{price}$</span>
             )}
+            </div>
+            <div className={styles.promo}>
+              
             <span className={styles.totalSum}>
               Promo code:{' '}
               {basket.promo.map((item) => {
@@ -252,6 +256,7 @@ const CartPage = ({ queryParams }: PageProps): JSX.Element => {
               color={ButtonColors.Primary}
               onClick={handleSubmit}
             />
+            </div>
           </div>
         </div>
       </section>
