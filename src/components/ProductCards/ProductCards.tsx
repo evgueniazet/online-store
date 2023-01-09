@@ -9,7 +9,7 @@ import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 
 
-const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
+const ProductCards = ({ products, queryParams, cardViewType  }: ProductCardsProps) => {
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
@@ -66,6 +66,7 @@ const ProductCards = ({ products, queryParams }: ProductCardsProps) => {
             isExistInBasket={basket.products.some((item) => item.id === card.id)}
             onAddToCart={handleAddToCart}
             onRemoveFromCart={handleRemoveFromCart}
+            cardViewType={cardViewType}
           />
         );
       })}

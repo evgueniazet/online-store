@@ -1,5 +1,5 @@
 export enum StorageKey {
-  backet = 'backet',
+  cardViewType = 'cardViewType',
   basket = 'basket',
   // TODO: Add additional storage keys here
 }

@@ -1,3 +1,6 @@
+import { CardProp } from '../interfaces/Product';
+import {CardViewTypes} from '../enums/CardViewType';
+
 export type Product = {
   id: number,
   title: string,
@@ -14,7 +17,8 @@ export type Product = {
 
 export type ProductCardsProps = {
   queryParams?: URLSearchParams,
-  products: Product[]
+  products: Product[],
+  cardViewType: CardViewTypes | null
 }
 
 export enum FilterListsOptions {

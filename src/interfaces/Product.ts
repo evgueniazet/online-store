@@ -1,3 +1,6 @@
+import { CardViewTypes } from '../enums/CardViewType';
+
+// export interface CardProp {
 export interface Product {
   brand: string;
   category: string;
@@ -10,4 +13,5 @@ export interface Product {
   rating?: number;
   stock?: number;
   images: string[];
+  cardViewType?: CardViewTypes | null;
 }

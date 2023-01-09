@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import styles from '../Card/Card.module.scss';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
+// import { CardProp } from '../../interfaces/Product';
+import Link from '../Link/Link';
+import classNames from 'classnames';
+import { CardViewTypes } from '../../enums/CardViewType';
+import { IconBasket } from '../../icons/icons';
 import { CardProps } from '../../interfaces/CardProps';
 
 export const Card: React.FC<CardProps> = ({
@@ -14,6 +19,7 @@ export const Card: React.FC<CardProps> = ({
   isExistInBasket,
   onAddToCart,
   onRemoveFromCart,
+                                          cardViewType
 }: CardProps) => {
   const handleClickAddToCart = (): void => {
     onAddToCart(id);
@@ -23,18 +29,36 @@ export const Card: React.FC<CardProps> = ({
     onRemoveFromCart(id);
   };
 
-  const handleClickDetails = (): void => {
-    location.href = `/product?productId=${id}`;
-  };
+  const cardClass = classNames(
+    styles.card,
+    {
+      [styles.cardBig]: cardViewType === CardViewTypes.big
+    },
+    {
+      [styles.cardSmall]: cardViewType === CardViewTypes.small
+    }
+  );
+
+  const getUrl = (id: number | undefined) => {
+    const query = new URLSearchParams();
+    if (id) {
+      query.set('productId', id.toString());
+    }
+
+    return `${window.location.origin}/product?${query.toString()}`;
+  }
 
   return (
-    <div className={styles.card}>
+    <div className={cardClass}>
       <div className={styles.cardTitle}>{title}</div>
-      <img src={images[0]} className={styles.cardImg} alt={title} />
+      <div className={styles.cardImgWrapper}>
+        <img src={images[0]} className={styles.cardImg} alt={title} />
+      </div>
+
       <div className={styles.cardInfoWrapper}>
         <div className={styles.cardInfo}>
-          <span>Category: {category}</span>
-          <span>Brand: {brand}</span>
+          {cardViewType === CardViewTypes.big ? <span>Category: {category}</span> : ''}
+          {cardViewType === CardViewTypes.big ? <span>Brand: {brand}</span> : ''}
           <span>Price: {price}</span>
         </div>
       </div>
@@ -54,12 +78,9 @@ export const Card: React.FC<CardProps> = ({
             onClick={handleClickAddToCart}
           />
         )}
-        <Button
-          title='Details'
-          color={ButtonColors.Primary}
-          className={styles.cardButton}
-          onClick={handleClickDetails}
-        />
+        <Link linkTo={getUrl(id)} className={styles.cardButton}>
+          Details
+        </Link>
       </div>
     </div>
   );
