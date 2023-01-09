@@ -12,7 +12,8 @@ import { BasketProduct } from '../../interfaces/BasketProduct';
 import { CartProduct } from '../CartProduct/CartProduct';
 import { Basket } from '../../interfaces/Basket';
 import { Product } from '../../types/Product';
-import { defaultBasket } from '../../variables/variables';
+import { defaultBasket } from '../../variables/defaultBasket';
+import { promo } from '../../variables/promo';
 
 const CartPage = ({ queryParams }: PageProps) => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -27,6 +28,33 @@ const CartPage = ({ queryParams }: PageProps) => {
 
   const handleChangeLimit = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLimit(e.target.value);
+  };
+
+  const handleSubmit = (): void => {
+    const isPromoExist = promo.some((item) => {
+      return item.code === promoCode.toUpperCase();
+    });
+
+    if (isPromoExist) {
+      const isPromoUsed = basket.promo.some((item) => {
+        return item.code === promoCode.toUpperCase();
+      });
+
+      if (!isPromoUsed) {
+        const basketCopy = { ...basket };
+        const promoObj = promo.find((elem) => {
+          return elem.code === promoCode.toUpperCase();
+        });
+
+        if (promoObj) {
+          basketCopy.promo.push(promoObj);
+        }
+        setBasket(basketCopy);
+        setPromoCode('');
+        storage.setData(StorageKey.basket, basketCopy);
+        window.dispatchEvent(new Event('storage'));
+      }
+    }
   };
 
   const handleClick = (): void => {
@@ -166,18 +194,18 @@ const CartPage = ({ queryParams }: PageProps) => {
                 }, 0)}
               $
             </span>
-            <span className={styles.totalSum}>Promo code:</span>
+            <span className={styles.totalSum}>Promo code: {basket.promo.map((item) => { return `${item.code}  `})} </span>
             <TextInput
               className={styles.sumTextInput}
-              placeholder='Insert text'
+              placeholder='Insert promo code'
               onChange={handleChangePromoCode}
               value={promoCode}
             />
             <Button
               title='Submit promo code'
-              className={styles.sumButton}
+              className={styles.submitButton}
               color={ButtonColors.Primary}
-              onClick={handleClick}
+              onClick={handleSubmit}
             />
           </div>
         </div>

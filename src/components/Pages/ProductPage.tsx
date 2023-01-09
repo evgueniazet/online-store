@@ -13,7 +13,7 @@ import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { BasketProduct } from '../../interfaces/BasketProduct';
 import { SearchQueryKeys } from '../../types/SearchQueryKeys';
-import { defaultBasket } from '../../variables/variables';
+import { defaultBasket } from '../../variables/defaultBasket';
 
 
 const ProductPage = ({ queryParams }: PageProps) => {

@@ -5,7 +5,7 @@ import { HeaderProps } from '../../interfaces/HeaderProps';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
-import { defaultBasket } from '../../variables/variables';
+import { defaultBasket } from '../../variables/defaultBasket';
 import DataService from '../../utils/DataService';
 
 export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps) => {
