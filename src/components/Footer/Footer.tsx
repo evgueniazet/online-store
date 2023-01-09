@@ -7,7 +7,7 @@ export const Footer = () => {
     <footer className={styles.footerWrapper}>
       <div className={styles.footer}>
         <div className={styles.footerAuthorsInfo}>
-          <span className={styles.authors}>Github authors:</span>
+          <span className={styles.authors}>Created by:</span>
           <div className={styles.footerAuthorsLinks}>
             <a className={styles.authorLink} href='https://github.com/Commandor05'>
               O. Kaliuzhnyi
