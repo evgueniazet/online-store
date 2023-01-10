@@ -20,6 +20,7 @@ const App = () => {
       }).catch((e) => {
         dataService.initialiseData(productsData);
         setIsDataLoaded(true);
+        console.log(e);
       });
   };
 
