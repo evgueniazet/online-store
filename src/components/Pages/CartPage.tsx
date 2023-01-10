@@ -31,8 +31,6 @@ const CartPage = (): JSX.Element => {
     nextPage,
     prevPage,
     page,
-    setPage,
-    totalPages,
   } = Pagination({
     contentPerPage: Number(limit),
     count: products.length,
@@ -81,10 +79,6 @@ const CartPage = (): JSX.Element => {
         window.dispatchEvent(new Event('storage'));
       }
     }
-  };
-
-  const handleClick = (): void => {
-    console.log('click');
   };
 
   const handleRemovePromo = (promoCode: string): void => {
