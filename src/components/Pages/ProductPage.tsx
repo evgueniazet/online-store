@@ -17,13 +17,24 @@ import { defaultBasket } from '../../variables/defaultBasket';
 
 
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
-  const productId: number = Number(queryParams?.get(SearchQueryKeys.productId));
+  const productId = Number(queryParams?.get(SearchQueryKeys.productId));
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
   const redirectToCart = (): void => {
-    window.location.href = '/cart';
+    const cartUrl = getCartUrl()
+    redirectTo(cartUrl);
+  };
+
+  const redirectTo = (linkTo: string) => {
+    window.history.pushState({}, '', linkTo);
+    const navigationEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navigationEvent);
+  };
+
+  const getCartUrl = () => {
+    return `${window.location.origin}/cart`;
   };
 
   const handleAddClick = (): void => {
@@ -92,8 +103,6 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
-      {/* TODO: Put conditional loader here while data is fetching */}
-      {/* TODO: Put Home template component here with fetched data as props */}
       <Header />
       <section className={styles.mainWrapper}>
         <div className={styles.mainDecoration} />

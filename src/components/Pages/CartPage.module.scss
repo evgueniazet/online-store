@@ -69,6 +69,17 @@
 .products {
   overflow: auto;
   height: 700px;
+
+  &::-webkit-scrollbar {
+    background-color: $primaryDark;
+    border-radius: 6px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 6px;
+  }
 }
 
 .productsHeaderTitle {
