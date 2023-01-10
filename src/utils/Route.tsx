@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { RouteProps } from '../types/Route';
+import { Routes } from './config/routes';
+import NotFoundPage from '../components/Pages/NotFoundPage';
 
 const Route = ({ path, children }: RouteProps) => {
   const queryString = window.location.search;
   const queryParams = new URLSearchParams(queryString);
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const routes = Object.values(Routes).filter(route => route !== '/').map(route => route.substring(1).toLowerCase());
 
   const onLocationChange = () => {
     setCurrentPath(window.location.pathname);
@@ -25,6 +28,9 @@ const Route = ({ path, children }: RouteProps) => {
     return child;
   });
 
+  if (!(currentPath === '/' || routes.includes(currentPath.substring(1).toLowerCase()))){
+    return <NotFoundPage />;
+  }
   return (
     <>
       {currentPath === path? childrenWithQuery: null}
