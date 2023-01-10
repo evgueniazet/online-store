@@ -14,13 +14,14 @@ import { BasketProduct } from '../../interfaces/BasketProduct';
 import { SearchQueryKeys } from '../../types/SearchQueryKeys';
 import { defaultBasket } from '../../variables/defaultBasket';
 import DataService from '../../utils/DataService';
-import { Product } from '../../types/Product';
+import Link from '../Link/Link';
+import { ProductCardProp } from '../../interfaces/ProductCardProp';
 
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
   const productId = Number(queryParams?.get(SearchQueryKeys.productId));
   const product = productId ? dataService.getProductById(Number(productId)) : undefined;
-  const [card, setCard] = useState<Product | null>(null);
+  const [card, setCard] = useState<ProductCardProp | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
