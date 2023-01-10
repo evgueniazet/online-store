@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { PaginationProps } from '../interfaces/PaginationProps';
 import { PaginationReturn } from '../interfaces/PaginationReturn';
 
-type UsePagination = (arg0: PaginationProps) => PaginationReturn;
+type Pagination = (arg0: PaginationProps) => PaginationReturn;
 
-export const Pagination: UsePagination = ({ contentPerPage, count }) => {
+export const Pagination: Pagination = ({ contentPerPage, count }) => {
   const [page, setPage] = useState(1);
   const pageCount = Math.ceil(count / contentPerPage);
   const lastIndex = page * contentPerPage;
