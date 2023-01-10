@@ -8,6 +8,7 @@ import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 import DataService from '../../utils/DataService';
 import { Product } from '../../types/Product';
+import Link from '../Link/Link';
 
 export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
@@ -15,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX
   const storage = LocalStorage.getInstance();
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const [price, setPrice] = useState<number>(0);
+
 
   const getPrice = (basket: Basket): number => {
     const summaryPrice = products
@@ -62,9 +64,10 @@ export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX
           <span className={styles.headerProductsSum}>
             {basket.products.reduce((a, b) => a + b.quantity, 0)}
           </span>
-          <a href='/cart'>
-            <IconBasket className={styles.headerBasket} />
-          </a>
+          <Link linkTo={`${window.location.origin}/cart`}>
+          <IconBasket className={styles.headerBasket} />
+          </Link>
+
         </div>
       </div>
     </header>
