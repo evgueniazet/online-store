@@ -4,5 +4,6 @@ export enum SearchQueryKeys {
   category = 'category',
   brand = 'brand',
   price = 'price',
+  stock = 'stock',
   productId = 'productId'
 }

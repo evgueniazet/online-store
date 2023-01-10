@@ -44,21 +44,24 @@ export const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
     }
   }, [maxVal, getPercent]);
 
-  // useEffect(() => {
-  //   onChange({ min: minVal, max: maxVal });
-  // }, [minVal, maxVal, onChange]);
+  useEffect(() => {
+    setMinVal(minValue);
+    setMaxVal(maxValue);
+
+  }, [minValue, maxValue]);
+
 
   const handleRangeChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.min(+event.target.value, maxVal - 1);
     setMinVal(value);
-    onChange({ min: minVal, max: maxVal });
+    onChange({ min: value, max: maxVal });
     event.target.value = value.toString();
   }
 
   const handleRangeChangeMax= (event: React.ChangeEvent<HTMLInputElement>)=> {
     const value = Math.max(+event.target.value, minVal + 1);
     setMaxVal(value);
-    onChange({ min: minVal, max: maxVal });
+    onChange({ min: minVal, max: value });
     event.target.value = value.toString();
   }
 
