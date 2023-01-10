@@ -4,7 +4,7 @@
   border-radius: 8px;
   border: 1px solid $primaryLight;
   width: 350px;
-  height: 250px;
+  height: 350px;
 }
 
 .cardImagesPreview {
@@ -31,10 +31,22 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1400px) {
   .cardMainImage {
     width: 250px;
-    height: 180px;
+    height: 250px;
+  }
+
+  .cardImage {
+    width: 50px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  .cardMainImage {
+    width: 200px;
+    height: 160px;
   }
 
   .cardImage {

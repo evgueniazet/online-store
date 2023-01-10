@@ -18,10 +18,8 @@ const App = () => {
         dataService.initialiseData(data.products);
         setIsDataLoaded(true);
       }).catch((e) => {
-        // backup plan: load data from local file
         dataService.initialiseData(productsData);
         setIsDataLoaded(true);
-        console.log(e);
       });
   };
 

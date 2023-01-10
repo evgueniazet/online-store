@@ -13,6 +13,7 @@ import { Basket } from '../../interfaces/Basket';
 import { Product } from '../../types/Product';
 import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
+import DataService from '../../utils/DataService';
 
 const CartPage = (): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -21,8 +22,9 @@ const CartPage = (): JSX.Element => {
   const [promoCode, setPromoCode] = React.useState<string>('');
   const [price, setPrice] = React.useState<number>(0);
   const storage = LocalStorage.getInstance();
+  const dataService: DataService = DataService.getInstance();
 
-  const getPrice = (basket: Basket): number => {
+  const getPrice = (basket: Basket, products: Product[]): number => {
     const summaryPrice = products
       .filter((product) => basket.products.some((item) => item.id === product.id))
       .reduce((a, b) => {
@@ -94,7 +96,7 @@ const CartPage = (): JSX.Element => {
       }
     });
     setBasket(basketCopy);
-    setPrice(getPrice(basket));
+    setPrice(getPrice(basket, products));
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
@@ -120,28 +122,28 @@ const CartPage = (): JSX.Element => {
 
     setBasket(basketCopy);
     setProducts(productsCopy);
-    setPrice(getPrice(basket));
+    setPrice(getPrice(basket, productsCopy)); 
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
-
+  
   useEffect(() => {
     const basket: Basket | null = storage.getData(StorageKey.basket);
 
     if (basket) {
       setBasket(basket);
-      const urls: string[] = basket.products.map(
-        (item) => `https://dummyjson.com/products/${item.id}`,
-      );
-      const promises = urls.map((url) => fetch(url));
 
-      Promise.all(promises)
-        .then((response) => Promise.all(response.map((r) => r.json())))
-        .then((results: Product[]) => {
-          setProducts(results);
-          const summaryPrice = getPrice(basket);
-          setPrice(summaryPrice);
-        });
+      const productIds = basket.products.map(
+        (item) => Number(item.id),
+      );
+
+      const products = productIds ? dataService.getProductsById(productIds) : [];
+      
+      if (products) {
+        setProducts(products);
+        const summaryPrice = getPrice(basket, products);
+        setPrice(summaryPrice);
+      }
     }
   }, []);
 
@@ -206,11 +208,12 @@ const CartPage = (): JSX.Element => {
             </div>
           </div>
           <div className={styles.sum}>
+            <div className={styles.sumInfo}>
             <span className={styles.sumTitle}>Summary</span>
             <span className={styles.sumProducts}>
               Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
             </span>
-            {basket.promo.some((item) => item) ? (
+            {basket.promo? basket.promo.some((item) => item) ? (
               <>
                 <span className={styles.totalSumWithPromo}>Total:{price}$</span>
                 <span className={styles.totalSum}>
@@ -220,13 +223,16 @@ const CartPage = (): JSX.Element => {
               </>
             ) : (
               <span className={styles.totalSum}>Total:{price}$</span>
-            )}
+            ) : ''}
+            </div>
+            <div className={styles.promo}>
+              
             <span className={styles.totalSum}>
               Promo code:{' '}
-              {basket.promo.map((item) => {
+              {basket.promo? basket.promo.map((item) => {
                 return (
                   <div key={item.discount} className={styles.promoCode}>
-                    {`${item.code}: -${item.discount}$ `}
+                    {`${item.code}: -${item.discount}`}$
                     <Button
                       key={item.code}
                       title='-'
@@ -236,7 +242,7 @@ const CartPage = (): JSX.Element => {
                     />
                   </div>
                 );
-              })}{' '}
+              })  : ''}{' '}
             </span>
             <TextInput
               className={styles.sumTextInput}
@@ -251,6 +257,7 @@ const CartPage = (): JSX.Element => {
               color={ButtonColors.Primary}
               onClick={handleSubmit}
             />
+            </div>
           </div>
         </div>
       </section>

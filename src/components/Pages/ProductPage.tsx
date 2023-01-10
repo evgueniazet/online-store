@@ -18,6 +18,8 @@ import Link from '../Link/Link';
 import { ProductCardProp } from '../../interfaces/ProductCardProp';
 
 
+
+
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
   const productId = Number(queryParams?.get(SearchQueryKeys.productId));
@@ -27,7 +29,18 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
   const storage = LocalStorage.getInstance();
 
   const redirectToCart = (): void => {
-    window.location.href = '/cart';
+    const cartUrl = getCartUrl();
+    redirectTo(cartUrl);
+  };
+
+  const redirectTo = (linkTo: string) => {
+    window.history.pushState({}, '', linkTo);
+    const navigationEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navigationEvent);
+  };
+
+  const getCartUrl = () => {
+    return `${window.location.origin}/cart`;
   };
 
   const handleAddClick = (): void => {
@@ -90,8 +103,6 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
-      {/* TODO: Put conditional loader here while data is fetching */}
-      {/* TODO: Put Home template component here with fetched data as props */}
       <Header />
       <section className={styles.mainWrapper}>
         <div className={styles.mainDecoration} />

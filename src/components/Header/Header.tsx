@@ -52,11 +52,10 @@ export const Header: React.FC<HeaderProps> = ({ queryParams }: HeaderProps): JSX
   return (
     <header className={styles.headerWrapper}>
       <div className={styles.header}>
-        <div className={styles.headerLogo}>
-          <a href='/'>
-            <IconStore className={styles.headerLogoIcon} />
-            <span className={styles.headerLogoTitle}>Online Store</span>
-          </a>
+        <div className={styles.headerLogo}>  
+            <a href='/' className={styles.headerLogoTitle} >
+            <IconStore href='/' className={styles.headerLogoIcon} />
+              Online Store</a>
         </div>
         <span className={styles.headerText}>Total:{price} $</span>
         <div className={styles.basketWrapper}>
