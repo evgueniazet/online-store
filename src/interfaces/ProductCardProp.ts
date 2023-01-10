@@ -1,5 +1,6 @@
 import { CardViewTypes } from '../enums/CardViewType';
 
+// export interface CardProp {
 export interface ProductCardProp {
   brand: string;
   category: string;

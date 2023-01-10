@@ -17,6 +17,9 @@ import DataService from '../../utils/DataService';
 import Link from '../Link/Link';
 import { ProductCardProp } from '../../interfaces/ProductCardProp';
 
+
+
+
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
   const productId = Number(queryParams?.get(SearchQueryKeys.productId));
