@@ -14,6 +14,7 @@ import { Product } from '../../types/Product';
 import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
 import DataService from '../../utils/DataService';
+import { Pagination } from '../../hooks/Pagination';
 
 const CartPage = (): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -24,6 +25,19 @@ const CartPage = (): JSX.Element => {
   const storage = LocalStorage.getInstance();
   const dataService: DataService = DataService.getInstance();
 
+  const {
+    firstIndex,
+    lastIndex,
+    nextPage,
+    prevPage,
+    page,
+    setPage,
+    totalPages,
+  } = Pagination({
+    contentPerPage: Number(limit),
+    count: products.length,
+  });
+
   const getPrice = (basket: Basket, products: Product[]): number => {
     const summaryPrice = products
       .filter((product) => basket.products.some((item) => item.id === product.id))
@@ -32,7 +46,7 @@ const CartPage = (): JSX.Element => {
         return a + b.price * itemsQuantity;
       }, 0);
     return summaryPrice;
-  };
+  };  
 
   const handleChangePromoCode = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPromoCode(e.target.value);
@@ -122,23 +136,21 @@ const CartPage = (): JSX.Element => {
 
     setBasket(basketCopy);
     setProducts(productsCopy);
-    setPrice(getPrice(basket, productsCopy)); 
+    setPrice(getPrice(basket, productsCopy));
     storage.setData(StorageKey.basket, basketCopy);
     window.dispatchEvent(new Event('storage'));
   };
-  
+
   useEffect(() => {
     const basket: Basket | null = storage.getData(StorageKey.basket);
 
     if (basket) {
       setBasket(basket);
 
-      const productIds = basket.products.map(
-        (item) => Number(item.id),
-      );
+      const productIds = basket.products.map((item) => Number(item.id));
 
       const products = productIds ? dataService.getProductsById(productIds) : [];
-      
+
       if (products) {
         setProducts(products);
         const summaryPrice = getPrice(basket, products);
@@ -156,6 +168,7 @@ const CartPage = (): JSX.Element => {
           <div className={styles.productsWrapper}>
             <div className={styles.productsHeader}>
               <span className={styles.productsHeaderTitle}>Products in cart</span>
+              <div>
               <span>Limit:</span>
               <TextInput
                 className={styles.productsHeaderInput}
@@ -163,20 +176,21 @@ const CartPage = (): JSX.Element => {
                 onChange={handleChangeLimit}
                 value={limit}
               />
+              </div>
               <div className={styles.productsHeaderSumButtons}>
                 <span className={styles.productsHeaderSum}>Page:</span>
                 <Button
                   className={styles.productsHeaderButton}
                   title='<'
                   color={ButtonColors.Secondary}
-                  onClick={handleClick}
+                  onClick={prevPage}
                 />
-                <span className={styles.productsHeaderSumNumber}>1</span>
+                <span className={styles.productsHeaderSumNumber}>{page}</span>
                 <Button
                   className={styles.productsHeaderButton}
                   title='>'
                   color={ButtonColors.Secondary}
-                  onClick={handleClick}
+                  onClick={nextPage}
                 />
               </div>
             </div>
@@ -186,7 +200,7 @@ const CartPage = (): JSX.Element => {
                   <span>Cart is empty!</span>
                 </div>
               )}
-              {products.map((product: Product, idx: number) => {
+              {products.slice(firstIndex, lastIndex).map((product: Product, idx: number) => {
                 return (
                   <CartProduct
                     onAddProduct={handleAddProduct}
@@ -209,54 +223,59 @@ const CartPage = (): JSX.Element => {
           </div>
           <div className={styles.sum}>
             <div className={styles.sumInfo}>
-            <span className={styles.sumTitle}>Summary</span>
-            <span className={styles.sumProducts}>
-              Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
-            </span>
-            {basket.promo? basket.promo.some((item) => item) ? (
-              <>
-                <span className={styles.totalSumWithPromo}>Total:{price}$</span>
-                <span className={styles.totalSum}>
-                  Sum with discount:
-                  {price - (basket.promo.reduce((a, b) => a + b.discount, 0) / 100) * price}$
-                </span>
-              </>
-            ) : (
-              <span className={styles.totalSum}>Total:{price}$</span>
-            ) : ''}
+              <span className={styles.sumTitle}>Summary</span>
+              <span className={styles.sumProducts}>
+                Products: {basket.products.reduce((a, b) => a + b.quantity, 0)}
+              </span>
+              {basket.promo ? (
+                basket.promo.some((item) => item) ? (
+                  <>
+                    <span className={styles.totalSumWithPromo}>Total:{price}$</span>
+                    <span className={styles.totalSum}>
+                      Sum with discount:
+                      {price - (basket.promo.reduce((a, b) => a + b.discount, 0) / 100) * price}$
+                    </span>
+                  </>
+                ) : (
+                  <span className={styles.totalSum}>Total:{price}$</span>
+                )
+              ) : (
+                ''
+              )}
             </div>
             <div className={styles.promo}>
-              
-            <span className={styles.totalSum}>
-              Promo code:{' '}
-              {basket.promo? basket.promo.map((item) => {
-                return (
-                  <div key={item.discount} className={styles.promoCode}>
-                    {`${item.code}: -${item.discount}`}$
-                    <Button
-                      key={item.code}
-                      title='-'
-                      color={ButtonColors.Primary}
-                      className={styles.promoButton}
-                      onClick={() => handleRemovePromo(item.code)}
-                    />
-                  </div>
-                );
-              })  : ''}{' '}
-            </span>
-            <TextInput
-              className={styles.sumTextInput}
-              placeholder='Insert promo code'
-              onChange={handleChangePromoCode}
-              value={promoCode}
-            />
-            <span className={styles.promocodes}>Promo: code5, code10, code15</span>
-            <Button
-              title='Submit promo code'
-              className={styles.submitButton}
-              color={ButtonColors.Primary}
-              onClick={handleSubmit}
-            />
+              <span className={styles.totalSum}>
+                Promo code:{' '}
+                {basket.promo
+                  ? basket.promo.map((item) => {
+                      return (
+                        <div key={item.discount} className={styles.promoCode}>
+                          {`${item.code}: -${item.discount}`}$
+                          <Button
+                            key={item.code}
+                            title='-'
+                            color={ButtonColors.Primary}
+                            className={styles.promoButton}
+                            onClick={() => handleRemovePromo(item.code)}
+                          />
+                        </div>
+                      );
+                    })
+                  : ''}{' '}
+              </span>
+              <TextInput
+                className={styles.sumTextInput}
+                placeholder='Insert promo code'
+                onChange={handleChangePromoCode}
+                value={promoCode}
+              />
+              <span className={styles.promocodes}>Promo: code5, code10, code15</span>
+              <Button
+                title='Submit promo code'
+                className={styles.submitButton}
+                color={ButtonColors.Primary}
+                onClick={handleSubmit}
+              />
             </div>
           </div>
         </div>
