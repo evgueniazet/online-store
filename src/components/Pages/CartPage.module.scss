@@ -69,6 +69,17 @@
 .products {
   overflow: auto;
   height: 65vh;
+
+  &::-webkit-scrollbar {
+    background-color: $primaryDark;
+    border-radius: 6px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 6px;
+  }
 }
 
 .productsHeaderTitle {
@@ -196,7 +207,6 @@
 }
 
 @media (max-width: 1300px) {
-
 }
 
 @media (max-width: 1000px) {
@@ -211,7 +221,6 @@
     width: 100%;
     margin-top: 30px;
   }
-
 
   .productInfo {
     margin-left: 10px;
