@@ -27,7 +27,8 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
     filterLists: initFilterLists,
     search: initSearch,
     cardViewType: initCardViewType,
-    priceRange: initPriceRange
+    priceRange: initPriceRange,
+    stockRange: initStockRange
   } = dataService.getData(queryParams);
 
   const [products, setProducts] = useState<Product[]>(initProducts);
@@ -36,10 +37,11 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
   const [filterLists, setFilterLists] = useState<FilterLists>(initFilterLists);
   const [search, setSearch] = useState<string>(initSearch);
   const [cardViewType, setCardViewType] = useState<CardViewTypes | null>(initCardViewType);
-  const [priseRange, setPriseRange] = useState<MultiRange>(initPriceRange);
+  const [priceRange, setPriseRange] = useState<MultiRange>(initPriceRange);
+  const [stockRange, setStockRange] = useState<MultiRange>(initStockRange);
 
   const handleQueryUpdate = (queryParams: URLSearchParams) => {
-    const { products, total, sort, filterLists, search, cardViewType, priceRange } = dataService.getData(queryParams);
+    const { products, total, sort, filterLists, search, cardViewType, priceRange, stockRange } = dataService.getData(queryParams);
     setProducts(products);
     setTotal(total);
     setSort(sort);
@@ -47,6 +49,7 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
     setSearch(search);
     setCardViewType(cardViewType);
     setPriseRange(priceRange);
+    setStockRange(stockRange);
   }
 
   const handleSmallViewSwitch = () => {
@@ -65,7 +68,8 @@ const HomePage = ({ queryParams }: PageProps): JSX.Element=> {
         <FilterBox
           queryParams={queryParams}
           filterLists={filterLists}
-          priseRange={priseRange}
+          priceRange={priceRange}
+          stockRange={stockRange}
           onQueryUpdate={handleQueryUpdate}
         />
         <ProductsUtilityPanel

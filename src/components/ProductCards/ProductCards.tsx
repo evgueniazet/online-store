@@ -8,6 +8,7 @@ import { StorageKey } from '../../interfaces/StorageKey';
 import { Basket } from '../../interfaces/Basket';
 import { defaultBasket } from '../../variables/defaultBasket';
 
+const NO_DATA = 'No data found';
 
 const ProductCards = ({ products, cardViewType  }: ProductCardsProps) => {
   const [basket, setBasket] = useState<Basket>(defaultBasket);
@@ -53,7 +54,7 @@ const ProductCards = ({ products, cardViewType  }: ProductCardsProps) => {
 
   return (
     <div className={styles.cardsContainer}>
-      {products.map((card) => {
+      {products.length > 0? products.map((card) => {
         return (
           <Card
             key={card.id}
@@ -69,7 +70,7 @@ const ProductCards = ({ products, cardViewType  }: ProductCardsProps) => {
             cardViewType={cardViewType}
           />
         );
-      })}
+      }) : <h2>{NO_DATA}</h2>}
     </div>
   );
 };

@@ -12,6 +12,7 @@ export type Data = {
   search: string,
   cardViewType: CardViewTypes | null;
   priceRange: MultiRange
+  stockRange: MultiRange
 }
 
 export type EnabledFilters = {
