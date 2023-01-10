@@ -6,7 +6,6 @@ import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Product } from '../../interfaces/Product';
 import { ProductImages } from '../ProductImages/ProductImages';
 import LocalStorage from '../../utils/LocalStorage';
 import { StorageKey } from '../../interfaces/StorageKey';
@@ -14,16 +13,19 @@ import { Basket } from '../../interfaces/Basket';
 import { BasketProduct } from '../../interfaces/BasketProduct';
 import { SearchQueryKeys } from '../../types/SearchQueryKeys';
 import { defaultBasket } from '../../variables/defaultBasket';
-
+import DataService from '../../utils/DataService';
+import { Product } from '../../types/Product';
 
 const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
+  const dataService: DataService = DataService.getInstance();
   const productId = Number(queryParams?.get(SearchQueryKeys.productId));
+  const product = productId ? dataService.getProductById(Number(productId)) : undefined;
   const [card, setCard] = useState<Product | null>(null);
   const [basket, setBasket] = useState<Basket>(defaultBasket);
   const storage = LocalStorage.getInstance();
 
   const redirectToCart = (): void => {
-    const cartUrl = getCartUrl()
+    const cartUrl = getCartUrl();
     redirectTo(cartUrl);
   };
 
