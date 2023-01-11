@@ -3,8 +3,9 @@ import styles from '../CheckoutForm/CheckoutForm.module.scss';
 import { TextInput } from '../Input/TextInput';
 import { Button } from '../Button/Button';
 import { ButtonColors } from '../../enums/ButtonColors';
+import {CheckoutFormProps} from '../../types/Page';
 
-export const CheckoutForm: React.FC = (): JSX.Element => {
+export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onConfirm }: CheckoutFormProps): JSX.Element => {
   const [name, setName] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
   const [adress, setAdress] = React.useState<string>('');
@@ -42,7 +43,7 @@ export const CheckoutForm: React.FC = (): JSX.Element => {
   };
 
   const handleConfirm = (): void => {
-    console.log('click');
+    onConfirm();
   };
 
   return (
