@@ -120,6 +120,17 @@
   height: 300px;
 }
 
+.cardContainer {
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productNumber {
+  color: $secondaryLight;
+}
+
 .sum {
   display: flex;
   flex-direction: column;

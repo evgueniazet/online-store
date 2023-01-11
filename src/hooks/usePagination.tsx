@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PaginationProps } from '../interfaces/PaginationProps';
 import { PaginationReturn } from '../interfaces/PaginationReturn';
 
 type Pagination = (arg0: PaginationProps) => PaginationReturn;
 
-export const Pagination: Pagination = ({ contentPerPage, count }) => {
+export const usePagination: Pagination = ({ contentPerPage, count }) => {
   const [page, setPage] = useState(1);
   const pageCount = Math.ceil(count / contentPerPage);
   const lastIndex = page * contentPerPage;
   const firstIndex = lastIndex - contentPerPage;
+
+  useEffect(() => {
+    if (page > pageCount && pageCount !== 0) {
+      setPage(pageCount);
+    }
+  }, [contentPerPage, count]);
 
   const changePage = (direction: boolean) => {
     setPage((state) => {
@@ -25,6 +31,7 @@ export const Pagination: Pagination = ({ contentPerPage, count }) => {
       }
     });
   };
+
   const setNumberPage = (num: number) => {
     if (num > pageCount) {
       setPage(pageCount);
@@ -34,6 +41,7 @@ export const Pagination: Pagination = ({ contentPerPage, count }) => {
       setPage(num);
     }
   };
+
   return {
     page,
     totalPages: pageCount,

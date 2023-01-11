@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CartPage.module.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -14,9 +14,9 @@ import { Product } from '../../types/Product';
 import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
 import DataService from '../../utils/DataService';
-import { Pagination } from '../../hooks/Pagination';
+import { usePagination } from '../../hooks/usePagination';
 import Modal from '../Modal/Modal';
-import {CheckoutForm} from '../CheckoutForm/CheckoutForm';
+import { CheckoutForm } from '../CheckoutForm/CheckoutForm';
 
 const CartPage = (): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -28,13 +28,7 @@ const CartPage = (): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const {
-    firstIndex,
-    lastIndex,
-    nextPage,
-    prevPage,
-    page,
-  } = Pagination({
+  const { firstIndex, lastIndex, nextPage, prevPage, page } = usePagination({
     contentPerPage: Number(limit),
     count: products.length,
   });
@@ -47,7 +41,7 @@ const CartPage = (): JSX.Element => {
         return a + b.price * itemsQuantity;
       }, 0);
     return summaryPrice;
-  };  
+  };
 
   const handleChangePromoCode = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPromoCode(e.target.value);
@@ -174,13 +168,13 @@ const CartPage = (): JSX.Element => {
             <div className={styles.productsHeader}>
               <span className={styles.productsHeaderTitle}>Products in cart</span>
               <div>
-              <span>Limit:</span>
-              <TextInput
-                className={styles.productsHeaderInput}
-                placeholder='Insert text'
-                onChange={handleChangeLimit}
-                value={limit}
-              />
+                <span>Limit:</span>
+                <TextInput
+                  className={styles.productsHeaderInput}
+                  placeholder='Insert text'
+                  onChange={handleChangeLimit}
+                  value={limit}
+                />
               </div>
               <div className={styles.productsHeaderSumButtons}>
                 <span className={styles.productsHeaderSum}>Page:</span>
@@ -207,21 +201,26 @@ const CartPage = (): JSX.Element => {
               )}
               {products.slice(firstIndex, lastIndex).map((product: Product, idx: number) => {
                 return (
-                  <CartProduct
-                    onAddProduct={handleAddProduct}
-                    onRemoveProduct={handleRemoveProduct}
-                    product={product}
-                    key={product.id}
-                    index={idx}
-                    stock={product.stock}
-                    quantity={
-                      basket.products[
-                        basket.products.findIndex((element) => {
-                          return product.id === element.id;
-                        })
-                      ]?.quantity
-                    }
-                  />
+                  <div className={styles.cardContainer} key={idx}>
+                    <span key={idx} className={styles.productNumber}>
+                      {(page - 1) * Number(limit) + 1 + idx}
+                    </span>
+                    <CartProduct
+                      onAddProduct={handleAddProduct}
+                      onRemoveProduct={handleRemoveProduct}
+                      product={product}
+                      key={product.id}
+                      index={idx}
+                      stock={product.stock}
+                      quantity={
+                        basket.products[
+                          basket.products.findIndex((element) => {
+                            return product.id === element.id;
+                          })
+                        ]?.quantity
+                      }
+                    />
+                  </div>
                 );
               })}
             </div>

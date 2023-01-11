@@ -18,8 +18,6 @@ export const CartProduct: React.FC<CartProduct> = ({
   onAddProduct,
   onRemoveProduct,
   quantity,
-  index,
-  // stock,
 }: CartProduct): JSX.Element => {
   const handleAddProduct = (): void => {
     onAddProduct(product.id, product.stock);
@@ -32,7 +30,6 @@ export const CartProduct: React.FC<CartProduct> = ({
   return (
     <div className={styles.product}>
       <div className={styles.productInformation}>
-        <span className={styles.productNumber}>{index + 1}</span>
         <img src={product.images[0]} className={styles.productImg} />
         <div className={styles.productInfo}>
           <span className={styles.productTitle}>{product.title}</span>

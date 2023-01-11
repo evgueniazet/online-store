@@ -5,21 +5,21 @@ import { ButtonColors } from '../../enums/ButtonColors';
 import Link from '../Link/Link';
 import classNames from 'classnames';
 import { CardViewTypes } from '../../enums/CardViewType';
-// import { IconBasket } from '../../icons/icons';
 import { CardProps } from '../../interfaces/CardProps';
 
 export const Card: React.FC<CardProps> = ({
-                                            title,
-                                            images,
-                                            brand,
-                                            category,
-                                            price,
-                                            id,
-                                            isExistInBasket,
-                                            onAddToCart,
-                                            onRemoveFromCart,
-                                            cardViewType
-                                          }: CardProps) => {
+  title,
+  images,
+  brand,
+  category,
+  price,
+  id,
+  isExistInBasket,
+  onAddToCart,
+  onRemoveFromCart,
+  cardViewType,
+}: CardProps) => {
+  
   const handleClickAddToCart = (): void => {
     onAddToCart(id);
   };
@@ -31,11 +31,11 @@ export const Card: React.FC<CardProps> = ({
   const cardClass = classNames(
     styles.card,
     {
-      [styles.cardBig]: cardViewType === CardViewTypes.big
+      [styles.cardBig]: cardViewType === CardViewTypes.big,
     },
     {
-      [styles.cardSmall]: cardViewType === CardViewTypes.small
-    }
+      [styles.cardSmall]: cardViewType === CardViewTypes.small,
+    },
   );
 
   const getUrl = (id: number | undefined) => {
@@ -45,7 +45,7 @@ export const Card: React.FC<CardProps> = ({
     }
 
     return `${window.location.origin}/product?${query.toString()}`;
-  }
+  };
 
   return (
     <div className={cardClass}>

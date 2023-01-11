@@ -96,7 +96,7 @@ const ProductPage = ({ queryParams }: PageProps): JSX.Element => {
 
     return `${window.location.origin}`;
   }
-  // todo: make nice error layout
+
   if (!card) {
     return <div>Error</div>;
   }
