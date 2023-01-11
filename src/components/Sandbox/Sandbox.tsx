@@ -10,6 +10,7 @@ import { SelectOption } from '../../interfaces/SelectOption';
 import { MultiRangeSliderData } from '../../interfaces/MultiRangeSliderData';
 import { RangePicker } from '../RangePicker/RangePicker';
 import { MultiRangeSlider } from '../MultiRangeSlider/MultiRangeSlider';
+import { CheckoutForm } from '../CheckoutForm/CheckoutForm';
 
 const OPTIONS = [
   {
@@ -78,8 +79,7 @@ export const Sandbox = () => {
         maxValue={35}
         onChange={({ min, max }: MultiRangeSliderData) => console.log(`min = ${min}, max = ${max}`)}
       />
-
-
+      <CheckoutForm />
     </div>
   );
 };
