@@ -49,7 +49,8 @@ class DataService implements DataProvidible {
       total: this.products.length,
       search: '',
       cardViewType: CardViewTypes.big,
-      priceRange: null
+      priceRange: null,
+      stockRange: null
     };
 
     if (queryParams) {
@@ -81,14 +82,28 @@ class DataService implements DataProvidible {
       }
 
       if (queryParams.has(SearchQueryKeys.price)) {
-        console.log('PPPPP');
+
         const params = queryParams.get(SearchQueryKeys.price)?.split(':');
-        console.log()
+
         if (Array.isArray(params)) {
           const [minVal, maxVal] = params;
+          data.priceRange = { min: Number(minVal), max: Number(maxVal) }
           data.products = data.products.filter((product) => {
-            console.log([minVal, maxVal]);
               return !!((product[SearchQueryKeys.price] <= Number(maxVal)) && (product[SearchQueryKeys.price] >= Number(minVal)));
+            }
+          );
+        }
+      }
+
+      if (queryParams.has(SearchQueryKeys.stock)) {
+
+        const params = queryParams.get(SearchQueryKeys.stock)?.split(':');
+
+        if (Array.isArray(params)) {
+          const [minVal, maxVal] = params;
+          data.stockRange = { min: Number(minVal), max: Number(maxVal) }
+          data.products = data.products.filter((product) => {
+              return !!((product[SearchQueryKeys.stock] <= Number(maxVal)) && (product[SearchQueryKeys.stock] >= Number(minVal)));
             }
           );
         }
@@ -115,8 +130,13 @@ class DataService implements DataProvidible {
         data.cardViewType = this.localStorage?.getData(StorageKey.cardViewType);
       }
 
-      data.priceRange = this.updateRange(data.products, MultiRangeType.price);
+      if (!queryParams.has(SearchQueryKeys.price)) {
+        data.priceRange = this.updateRange(data.products, MultiRangeType.price);
+      }
 
+      if (!queryParams.has(SearchQueryKeys.stock)) {
+        data.stockRange = this.updateRange(data.products, MultiRangeType.stock);
+      }
     }
 
     return data;

@@ -6,7 +6,8 @@ export type FilterBoxProps = {
   filterLists: FilterLists,
   onQueryUpdate: (queryParams: URLSearchParams) => void
   onSliderUpdate?: (type: MultiRangeType, values: MultiRange) => void;
-  priseRange: MultiRange
+  priceRange: MultiRange,
+  stockRange: MultiRange
 }
 
 export type MultiRange = {
