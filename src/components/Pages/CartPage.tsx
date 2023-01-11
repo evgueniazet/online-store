@@ -28,7 +28,7 @@ const CartPage = (): JSX.Element => {
   const dataService: DataService = DataService.getInstance();
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const { firstIndex, lastIndex, nextPage, totalPages, prevPage, page } = usePagination({
+  const { firstIndex, lastIndex, nextPage, prevPage, page } = usePagination({
     contentPerPage: Number(limit),
     count: products.length,
   });
@@ -123,7 +123,6 @@ const CartPage = (): JSX.Element => {
           productsCopy.splice(productIndex, 1);
         }
       }
-
     });
 
     setBasket(basketCopy);

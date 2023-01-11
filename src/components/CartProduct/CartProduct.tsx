@@ -18,8 +18,6 @@ export const CartProduct: React.FC<CartProduct> = ({
   onAddProduct,
   onRemoveProduct,
   quantity,
-  index,
-  // stock,
 }: CartProduct): JSX.Element => {
   const handleAddProduct = (): void => {
     onAddProduct(product.id, product.stock);
