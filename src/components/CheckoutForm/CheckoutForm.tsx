@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../CheckoutForm/CheckoutForm.module.scss';
 import { TextInput } from '../Input/TextInput';
 import { Button } from '../Button/Button';
