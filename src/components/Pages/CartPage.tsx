@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './CartPage.module.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -15,6 +15,8 @@ import { defaultBasket } from '../../variables/defaultBasket';
 import { promo } from '../../variables/promo';
 import DataService from '../../utils/DataService';
 import { Pagination } from '../../hooks/Pagination';
+import Modal from '../Modal/Modal';
+import {CheckoutForm} from '../CheckoutForm/CheckoutForm';
 
 const CartPage = (): JSX.Element => {
   const [basket, setBasket] = React.useState<Basket>(defaultBasket);
@@ -24,6 +26,7 @@ const CartPage = (): JSX.Element => {
   const [price, setPrice] = React.useState<number>(0);
   const storage = LocalStorage.getInstance();
   const dataService: DataService = DataService.getInstance();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const {
     firstIndex,
@@ -153,6 +156,14 @@ const CartPage = (): JSX.Element => {
     }
   }, []);
 
+  const showCheckoutForm = (): void => {
+    setShowModal(true);
+  };
+
+  const hideCheckoutForm = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className={styles.wrapper}>
       <Header />
@@ -270,11 +281,21 @@ const CartPage = (): JSX.Element => {
                 color={ButtonColors.Primary}
                 onClick={handleSubmit}
               />
+
+              <Button
+                title='Buy Now'
+                className={styles.submitButton}
+                color={ButtonColors.Primary}
+                onClick={showCheckoutForm}
+              />
             </div>
           </div>
         </div>
       </section>
       <Footer />
+      <Modal onClose={hideCheckoutForm} show={showModal}>
+        <CheckoutForm onConfirm={hideCheckoutForm} />
+      </Modal>
     </div>
   );
 };

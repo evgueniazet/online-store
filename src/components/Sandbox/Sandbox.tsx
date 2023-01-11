@@ -11,6 +11,7 @@ import { MultiRangeSliderData } from '../../interfaces/MultiRangeSliderData';
 import { RangePicker } from '../RangePicker/RangePicker';
 import { MultiRangeSlider } from '../MultiRangeSlider/MultiRangeSlider';
 import { CheckoutForm } from '../CheckoutForm/CheckoutForm';
+import Modal from '../Modal/Modal';
 
 const OPTIONS = [
   {
@@ -37,8 +38,16 @@ export const Sandbox = () => {
   const [isCheckedB, setIsCheckedB] = useState<boolean>(false);
   const [select, setSelect] = useState<SelectOption['value']>(OPTIONS[3].value);
   const [range, setRange] = useState<string>('0');
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+
+  const hideCheckoutForm = () => {
+    console.log('toggle')
+    setShowModal(false);
+  };
 
   const handleClick = (): void => {
+    setShowModal(true);
     console.log('click');
   };
 
@@ -64,6 +73,8 @@ export const Sandbox = () => {
 
   return (
     <div className={styles.app}>
+
+
       Awesome store app!!!
       <Button title='button1' color={ButtonColors.Primary} onClick={handleClick} />
       <Button title='button2' color={ButtonColors.Secondary} onClick={handleClick} />
@@ -79,7 +90,11 @@ export const Sandbox = () => {
         maxValue={35}
         onChange={({ min, max }: MultiRangeSliderData) => console.log(`min = ${min}, max = ${max}`)}
       />
-      <CheckoutForm />
+
+      <Modal onClose={hideCheckoutForm} show={showModal}>
+        <CheckoutForm onConfirm={hideCheckoutForm} />
+      </Modal>
+
     </div>
   );
 };
