@@ -74,9 +74,17 @@ class DataService implements DataProvidible {
       if (queryParams.has(SearchQueryKeys.search)) {
         const param = queryParams.get(SearchQueryKeys.search);
         if (param) {
-          data.products = data.products.filter(({ description }) =>
-            description.toLocaleLowerCase().includes(param.toLocaleLowerCase()),
-          );
+          data.products = data.products.filter(({ description, title, brand, category, stock, price }) =>
+          {
+            const desc = description.toLocaleLowerCase();
+            const tit = title.toLocaleLowerCase();
+            const br = brand.toLocaleLowerCase();
+            const cat = category.toLocaleLowerCase();
+            const st = stock.toString();
+            const pr = price.toString();
+            const searchString = desc.concat(tit, br, cat, st, pr);
+            return searchString.toLocaleLowerCase().includes(param.toLocaleLowerCase());
+          });
           data.search = param;
         }
       }
