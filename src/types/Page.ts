@@ -1,4 +1,4 @@
-import {MouseEventHandler, ReactNode} from 'react';
+import {FormEvent, MouseEventHandler, ReactNode} from 'react';
 
 export type PageProps = {
   queryParams?: URLSearchParams,
@@ -11,5 +11,5 @@ export type ModalProps = Pick<PageProps, 'children'> & {
 }
 
 export type CheckoutFormProps = {
-  onConfirm: () => void
+  onConfirm: () => void;
 }

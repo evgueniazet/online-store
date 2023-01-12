@@ -27,6 +27,7 @@ const CartPage = (): JSX.Element => {
   const storage = LocalStorage.getInstance();
   const dataService: DataService = DataService.getInstance();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   const { firstIndex, lastIndex, nextPage, prevPage, page } = usePagination({
     contentPerPage: Number(limit),
@@ -153,6 +154,32 @@ const CartPage = (): JSX.Element => {
   const showCheckoutForm = (): void => {
     setShowModal(true);
   };
+
+  const redirectToHome = () => {
+    const url = window.location.origin;
+    window.history.pushState({}, '', url);
+    const navigationEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navigationEvent);
+  };
+
+  const clearBasket = () => {
+    storage.removeData(StorageKey.basket);
+    window.dispatchEvent(new Event('storage'));
+  }
+
+  const hideConfirmModal = () => {
+    setShowConfirmModal(false);
+  }
+
+  const hideCheckoutFormAndConfirm = () => {
+    hideCheckoutForm();
+    clearBasket();
+    setShowConfirmModal(true);
+    setTimeout(() => {
+      setShowConfirmModal(false);
+      redirectToHome()
+    }, 500);
+  }
 
   const hideCheckoutForm = () => {
     setShowModal(false);
@@ -293,7 +320,15 @@ const CartPage = (): JSX.Element => {
       </section>
       <Footer />
       <Modal onClose={hideCheckoutForm} show={showModal}>
-        <CheckoutForm onConfirm={hideCheckoutForm} />
+        <CheckoutForm onConfirm={hideCheckoutFormAndConfirm} />
+      </Modal>
+      <Modal onClose={hideConfirmModal} show={showConfirmModal}>
+        <div className={styles.confirmModalWrapper}>
+          <div>
+            <h2>Order is processed!</h2>
+          </div>
+        </div>
+
       </Modal>
     </div>
   );
