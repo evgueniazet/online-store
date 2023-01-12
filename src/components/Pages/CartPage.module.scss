@@ -12,6 +12,17 @@
   justify-content: center;
 }
 
+.confirmModalWrapper {
+  width: 300px;
+  height: 100px;
+  color: $secondaryLight;
+  border-radius: 10px;
+  border: 1px solid $primary;
+  background-color: $primaryLight;
+  display: flex;
+  justify-content: center;
+}
+
 .mainDecoration {
   height: 100%;
   left: 0;
